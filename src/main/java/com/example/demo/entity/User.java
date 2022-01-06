@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.support.Level;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
+@Data
 public class User extends BaseEntity{
 
     @Id
@@ -21,11 +24,11 @@ public class User extends BaseEntity{
     private Level level;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private List<Order> orderHistory = new ArrayList<>();
+    @OneToMany
+    private List<Order> orderHistory;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private List<Order> orderOnGoing = new ArrayList<>();
+    @OneToMany
+    private List<Order> orderOnGoing;
 
 }
