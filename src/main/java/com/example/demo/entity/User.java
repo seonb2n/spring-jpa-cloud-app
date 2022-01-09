@@ -4,15 +4,17 @@ import com.example.demo.support.Level;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
 @Entity
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
 public class User extends BaseEntity{
 
     @Id
@@ -30,5 +32,4 @@ public class User extends BaseEntity{
     @ToString.Exclude
     @OneToMany
     private List<Order> orderOnGoing;
-
 }

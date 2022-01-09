@@ -1,17 +1,20 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserEnrollDto;
+import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.support.Level;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class HomeControllerTest {
 
     @Autowired
@@ -27,8 +30,35 @@ class HomeControllerTest {
     @Test
     public void userSaveTest() throws Exception {
         //given
-        homeController.saveUser();
+        UserEnrollDto userEnrollDto = UserEnrollDto.builder()
+                .userName("sbsb")
+                .userLocation("Seoul")
+                .build();
+
         //when
+        homeController.saveUser(userEnrollDto);
+
+
+        //then
+        System.out.println(">>> " + userRepository.findUserById(1L).get().getCreatedAt());
+        System.out.println(">>> " + userRepository.findUserById(1L).get().getUpdateAt());
+        System.out.println(">>> " + userRepository.findUserById(1L).get());
+    }
+
+    @Test
+    public void userUpdateTest() throws Exception {
+        //given
+        User user = User.builder()
+                .userName("sbsb")
+                .userLocation("Seoul")
+                .level(Level.SILVER)
+                .build();
+
+        User u1 = userRepository.save(user);
+
+        //when
+        u1.setUserName("sbsb-new");
+        //영속성 컨택스트에 의해서 관리되는 user 는 이름을 바꾸기만 해도 update 가 자동으로 될 것이다.
 
         //then
         System.out.println(">>> " + userRepository.findUserById(1L).get());
