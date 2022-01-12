@@ -1,0 +1,27 @@
+package com.example.demo.entity;
+
+import com.example.demo.support.Status;
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+public class PostIt extends BaseEntity{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String content;
+
+    @OneToOne
+    private PostItCategory category;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+}
