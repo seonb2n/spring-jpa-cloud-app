@@ -3,15 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.dto.UserEnrollDto;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.support.Level;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -51,7 +48,6 @@ class HomeControllerTest {
         User user = User.builder()
                 .userName("sbsb")
                 .userLocation("Seoul")
-                .level(Level.SILVER)
                 .build();
 
         User u1 = userRepository.save(user);

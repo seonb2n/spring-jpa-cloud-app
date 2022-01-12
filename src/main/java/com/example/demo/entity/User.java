@@ -1,11 +1,8 @@
 package com.example.demo.entity;
 
-import com.example.demo.support.Level;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,13 +20,7 @@ public class User extends BaseEntity{
 
     private String userName;
     private String userLocation;
-    private Level level;
 
-    @ToString.Exclude
-    @OneToMany
-    private List<Order> orderHistory;
+    
 
-    @ToString.Exclude
-    @OneToMany
-    private List<Order> orderOnGoing;
 }
