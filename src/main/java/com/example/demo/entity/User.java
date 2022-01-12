@@ -11,16 +11,20 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class User extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
     private Long id;
 
-    private String userName;
-    private String userLocation;
+    private String userEmail;
+    private String password;
+    private String userNickName;
 
-    
+    private String startDayTime;
+    private String endDayTime;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Project> projectList = new java.util.ArrayList<>();
 }
