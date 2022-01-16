@@ -15,6 +15,7 @@ import java.util.List;
 public class Project extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_id", nullable = false)
     private Long id;
 
     @ManyToOne

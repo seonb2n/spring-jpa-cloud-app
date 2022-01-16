@@ -13,7 +13,7 @@ import java.util.List;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "task_id", nullable = false)
     private Long id;
 
     @ManyToOne

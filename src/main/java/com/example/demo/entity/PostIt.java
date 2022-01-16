@@ -15,11 +15,17 @@ public class PostIt extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "postit_id", nullable = false)
     private Long id;
 
     private String content;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private PostItCategory category;
 
     @Enumerated(EnumType.STRING)
