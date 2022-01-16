@@ -11,4 +11,5 @@ import java.util.Optional;
 public class UserJpaRepositoryImpl implements UserRepositoryCustom{
 
     private final EntityManager em;
+
 }

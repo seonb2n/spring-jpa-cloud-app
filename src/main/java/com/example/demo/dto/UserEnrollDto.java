@@ -1,12 +1,15 @@
 package com.example.demo.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEnrollDto {
 
     @NotBlank(message = "이메일은 필수 값입니다.")
@@ -14,7 +17,6 @@ public class UserEnrollDto {
     private String userEmail;
 
     @NotBlank(message = "비밀번호는 필수 값입니다.")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$")
     private String password;
 
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")

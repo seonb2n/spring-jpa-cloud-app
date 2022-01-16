@@ -12,5 +12,8 @@ import java.util.Optional;
 
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long>, UserRepositoryCustom{
-    
+
+    public void deleteUserByUserEmail(String userEmail);
+
+    public Optional<User> findUserByUserEmail(String userEmail);
 }
