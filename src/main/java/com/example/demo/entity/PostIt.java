@@ -24,9 +24,7 @@ public class PostIt extends BaseEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private PostItCategory category;
+    private String category;
 
     @Enumerated(EnumType.STRING)
     private Status status;
