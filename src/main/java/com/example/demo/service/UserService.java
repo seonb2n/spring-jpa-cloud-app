@@ -12,6 +12,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public User userEnrollService(UserEnrollDto userEnrollDto) {
         User user = new User();
         user.setUserEmail(userEnrollDto.getUserEmail());
