@@ -6,14 +6,19 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -52,5 +57,14 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                 throw new TokenExpiredException("refresh Token expired");
             }
         }
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        User user = (User) authResult.getPrincipal();
+        response.setHeader("auth_token", JWTUtil.makeAuthToken(user));
+        response.setHeader("refresh_token", JWTUtil.makeRefreshToken(user));
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        response.getOutputStream().write(objectMapper.writeValueAsBytes(user));
     }
 }

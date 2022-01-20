@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
+import com.auth0.jwt.JWT;
 import com.example.demo.dto.UserEnrollDto;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserAuthority;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,6 +33,8 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user1);
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findUserByUserEmail(username).orElseThrow(() -> new UsernameNotFoundException(username));
@@ -50,5 +54,17 @@ public class UserService implements UserDetailsService {
                 userRepository.save(user);
             }
         });
+    }
+
+    public User logIn(String userEmail, String password) {
+        userRepository.findUserByUserEmail(userEmail).ifPresent(user -> {
+            if(user.getPassword().equals(password)) {
+                return;
+            } else {
+                throw new IllegalArgumentException("아이디 혹은 비밀번호가 잘못됐습니다.");
+            }
+        });
+
+        return userRepository.findUserByUserEmail(userEmail).get();
     }
 }
