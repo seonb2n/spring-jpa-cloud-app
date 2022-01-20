@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.UserEnrollDto;
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserAuthority;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,15 +10,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public User userEnrollService(UserEnrollDto userEnrollDto) {
         User user = new User();
@@ -27,11 +26,29 @@ public class UserService implements UserDetailsService {
         user.setStartDayTime(userEnrollDto.getStartDayTime());
         user.setEndDayTime(userEnrollDto.getEndDayTime());
 
-        return userRepository.save(user);
+        User user1 = userRepository.save(user);
+        addAuthority(user1.getId(), "ROLE_USER");
+        return userRepository.save(user1);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findUserByUserEmail(username).orElseThrow(() -> new UsernameNotFoundException(username));
+    }
+
+    public void addAuthority(Long userId, String authority) {
+        userRepository.findUserById(userId).ifPresent(user -> {
+            UserAuthority role = new UserAuthority(userId, authority);
+            HashSet<UserAuthority> authorityHashSet = new HashSet<>();
+            if(user.getAuthorities() == null){
+                authorityHashSet.add(role);
+                user.setAuthorities(authorityHashSet);
+                userRepository.save(user);
+            } else if(!user.getAuthorities().contains(role)) {
+                authorityHashSet.addAll(user.getAuthorities());
+                authorityHashSet.add(role);
+                userRepository.save(user);
+            }
+        });
     }
 }

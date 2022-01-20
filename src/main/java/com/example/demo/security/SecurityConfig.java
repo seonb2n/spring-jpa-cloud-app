@@ -29,14 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().and()
                 .authorizeRequests(request -> {
-                    request.antMatchers("/", "/login", "/enrollUser").permitAll()
+                    request.antMatchers("/", "/login", "/api/user/enrollUser").permitAll()
                             .anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(checkFilter, BasicAuthenticationFilter.class)
                 .rememberMe();
-
-        super.configure(http);
     }
 }
