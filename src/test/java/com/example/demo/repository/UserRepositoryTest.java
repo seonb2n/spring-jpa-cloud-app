@@ -6,6 +6,7 @@ import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -37,5 +38,7 @@ class UserRepositoryTest {
         //then
         User user = userRepository.findUserByUserEmail(userEmail).get();
         assertThat(user.getUserNickName()).isEqualTo("new-user-test");
+
+        userService.addAuthority(user.getId(), "ROLE_USER");
     }
 }
