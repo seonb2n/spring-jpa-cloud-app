@@ -9,10 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/user")
@@ -46,6 +49,12 @@ public class UserController {
             response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             return ResponseEntity.ok().body("로그인 성공!");
         }
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping("/greeting")
+    public String greeting(Authentication authentication) {
+        return "hello " + authentication.getName();
     }
 
 }
