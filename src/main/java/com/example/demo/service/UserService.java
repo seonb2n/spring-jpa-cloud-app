@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
         user.setEndDayTime(userEnrollDto.getEndDayTime());
 
         User user1 = userRepository.save(user);
-        addAuthority(user1.getId(), "ROLE_USER");
+        addAuthority(user1.getId(), userEnrollDto.getUserAuthority());
         return userRepository.save(user1);
     }
 

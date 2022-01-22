@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.UserAuthority;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -24,4 +25,6 @@ public class UserEnrollDto {
 
     private String startDayTime;
     private String endDayTime;
+
+    private String userAuthority;
 }
