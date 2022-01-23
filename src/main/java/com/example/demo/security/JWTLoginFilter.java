@@ -77,6 +77,5 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setHeader("refresh_token", JWTUtil.makeRefreshToken(user));
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 //        response.sendRedirect("/api/user/greeting");
-        chain.doFilter(request, response);
     }
 }
