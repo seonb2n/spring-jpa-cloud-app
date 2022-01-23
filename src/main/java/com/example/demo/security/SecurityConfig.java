@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +15,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
-
+    
     public SecurityConfig(UserService userService) {
         this.userService = userService;
     }
