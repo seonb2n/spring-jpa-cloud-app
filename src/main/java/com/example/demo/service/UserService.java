@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+
 
     public User userEnrollService(UserEnrollDto userEnrollDto) {
         User user = new User();
@@ -32,8 +34,6 @@ public class UserService implements UserDetailsService {
         addAuthority(user1.getId(), userEnrollDto.getUserAuthority());
         return userRepository.save(user1);
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -66,5 +66,13 @@ public class UserService implements UserDetailsService {
         });
 
         return userRepository.findUserByUserEmail(userEmail).get();
+    }
+
+    public User findUserById(Long userId) {
+        if (userRepository.findUserById(userId).isPresent()) {
+           return userRepository.findUserById(userId).get();
+        } else {
+            throw new IllegalArgumentException("해당 아이디를 가진 유저는 없습니다.");
+        }
     }
 }
