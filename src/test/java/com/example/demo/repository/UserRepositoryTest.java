@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.dto.UserEnrollDto;
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.demo.domain.dto.UserEnrollDto;
+import com.example.demo.domain.entity.User;
+import com.example.demo.application.service.UserService;
+import com.example.demo.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
