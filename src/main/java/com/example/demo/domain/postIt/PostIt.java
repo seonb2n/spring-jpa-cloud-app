@@ -1,4 +1,4 @@
-package com.example.demo.domain.post;
+package com.example.demo.domain.postIt;
 
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.user.User;

@@ -2,7 +2,7 @@ package com.example.demo.domain.user;
 
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
-import com.example.demo.domain.post.PostIt;
+import com.example.demo.domain.postIt.PostIt;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
