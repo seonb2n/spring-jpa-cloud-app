@@ -25,7 +25,7 @@ public class PostItServiceImpl implements PostItService{
         // 1.command -> initPostIt
         // 2. save initPostIt to DB
         // 3. PostIt -> PostItInfo and return
-        var initPostIt = registerPostIt.toEntity(userReader.getUser(registerPostIt.getUserToken()));
+        var initPostIt = registerPostIt.toEntity(userReader.getUserWithUserToken(registerPostIt.getUserToken()));
         PostIt postIt = postItStore.store(initPostIt);
         return new PostItInfo.Main(postIt);
     }

@@ -33,4 +33,15 @@ public class UserApiController {
         return CommonResponse.success(response);
     }
 
+    @PostMapping("/getuser")
+    public CommonResponse getUser(@RequestBody UserDto.GetWithTokenRequest getWithTokenRequest) {
+        //1. 파라미터 -> userToken 추출
+        //2. UserFacade 호출해서 getUser 처리
+        //3. UserFacade 처리 결과(UserInfo) -> UserDto.GetResponse 변환
+        //4. CommonResponse 의 형태로 변환 후 Return
+        String userToken = getWithTokenRequest.getUserToken();
+        var userInfo = userFacade.getUser(userToken);
+        var response = new UserDto.GetWithTokenResponse(userInfo);
+        return CommonResponse.success(response);
+    }
 }

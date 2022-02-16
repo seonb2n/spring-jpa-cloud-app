@@ -19,4 +19,9 @@ public class UserFacade {
         return userInfo;
     }
 
+    public UserInfo.Main getUser(String userToken) {
+        var userInfo = userService.getUser(userToken);
+        return userInfo;
+    }
+
 }

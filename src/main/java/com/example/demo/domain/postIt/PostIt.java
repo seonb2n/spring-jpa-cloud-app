@@ -3,6 +3,7 @@ package com.example.demo.domain.postIt;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,9 +22,9 @@ public class PostIt extends BaseEntity {
     private Long id;
     private String postItToken;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @ToString.Exclude
     private User user;
     private String userToken;
 

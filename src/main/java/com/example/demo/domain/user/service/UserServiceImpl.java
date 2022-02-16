@@ -6,8 +6,8 @@ import com.example.demo.domain.user.UserInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +28,10 @@ public class UserServiceImpl implements UserService{
         return new UserInfo.Main(user);
     }
 
-
+    @Override
+    @Transactional(readOnly = true)
+    public UserInfo.Main getUser(String userToken) {
+        User user = userReader.getUserWithUserToken(userToken);
+        return new UserInfo.Main(user);
+    }
 }

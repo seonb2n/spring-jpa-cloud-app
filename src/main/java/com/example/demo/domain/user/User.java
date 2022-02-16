@@ -3,6 +3,7 @@ package com.example.demo.domain.user;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.postIt.PostIt;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,7 @@ public class User extends BaseEntity {
     private String startDayTime;
     private String endDayTime;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<PostIt> postItList = new ArrayList<>();
 
