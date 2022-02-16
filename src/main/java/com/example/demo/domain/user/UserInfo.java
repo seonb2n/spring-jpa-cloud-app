@@ -1,7 +1,10 @@
 package com.example.demo.domain.user;
 
+import com.example.demo.domain.postIt.PostIt;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
 
 /**
 User data output 을 처리하는 info
@@ -20,6 +23,7 @@ public class UserInfo {
         private final String startDayTime;
         private final String endDayTime;
         private final User.UserStatus status;
+        private final List<PostIt> postItList;
 
         public Main(User user) {
             this.userId = user.getId();
@@ -30,6 +34,7 @@ public class UserInfo {
             this.startDayTime = user.getStartDayTime();
             this.endDayTime = user.getEndDayTime();
             this.status = user.getStatus();
+            this.postItList = user.getPostItList();
         }
 
     }

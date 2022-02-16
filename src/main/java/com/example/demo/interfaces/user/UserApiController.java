@@ -32,4 +32,5 @@ public class UserApiController {
         var response = new UserDto.RegisterResponse(userInfo);
         return CommonResponse.success(response);
     }
+
 }

@@ -23,6 +23,7 @@ public class PostIt extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
     private String userToken;
 

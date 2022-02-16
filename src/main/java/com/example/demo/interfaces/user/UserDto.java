@@ -50,4 +50,21 @@ public class UserDto {
             this.status = userInfo.getStatus();
         }
     }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class GetWithTokenRequest{
+
+        private String userToken;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class GetWithTokenResponse {
+
+    }
+
 }

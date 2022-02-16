@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/postIts")
+@RequestMapping("/api/v1/postits")
 public class PostItApiController {
 
     private final PostItFacade postItFacade;

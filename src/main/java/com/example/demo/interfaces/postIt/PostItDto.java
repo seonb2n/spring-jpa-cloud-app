@@ -35,7 +35,6 @@ public class PostItDto {
     public static class RegisterResponse {
         private final Long postItId;
         private final String postItToken;
-        private final User user;
         private final String userToken;
         private final String content;
         private final PostIt.PostItStatus status;
@@ -43,7 +42,6 @@ public class PostItDto {
         public RegisterResponse(PostItInfo.Main postItInfo) {
             this.postItId = postItInfo.getPostItId();
             this.postItToken = postItInfo.getPostItToken();
-            this.user = postItInfo.getUser();
             this.userToken = postItInfo.getUserToken();
             this.content = postItInfo.getContent();
             this.status = postItInfo.getStatus();
