@@ -1,0 +1,11 @@
+### 사용자 등록
+POST http://localhost:8080/api/v1/users/register
+Content-Type: application/json
+
+{
+  "userEmail": "abc123@naver.com",
+  "password": "1234",
+  "userNickName": "user-test",
+  "startDayTime": "09:00",
+  "endDayTime": "16:00"
+}

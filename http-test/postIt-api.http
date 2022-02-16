@@ -1,0 +1,10 @@
+### 포스트잇 등록
+POST http://localhost:8080/api/v1/postits/register
+Content-Type: application/json
+
+{
+  "userToken": "user_U3CgjKw07KcQP3U",
+  "content": "test-postIt",
+  "status": "INCOMPLETE"
+
+}
