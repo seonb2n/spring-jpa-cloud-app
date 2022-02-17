@@ -1,15 +1,13 @@
 package com.example.demo.interfaces.postIt;
 
 import com.example.demo.domain.postIt.PostIt;
-import com.example.demo.domain.postIt.PostItCommand;
 import com.example.demo.domain.postIt.PostItInfo;
-import com.example.demo.domain.user.User;
-import com.example.demo.interfaces.user.UserDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 /**
  api 통신에서 사용하는 UserDTO
@@ -45,6 +43,27 @@ public class PostItDto {
             this.userToken = postItInfo.getUserToken();
             this.content = postItInfo.getContent();
             this.status = postItInfo.getStatus();
+        }
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class RegisterBatchRequest {
+
+        private List<RegisterRequest> registerRequestList;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class RegisterBatchResponse {
+
+        private List<RegisterResponse> registerResponses;
+
+        public RegisterBatchResponse(List<PostItInfo.Main> postItInfoList) {
+            postItInfoList.forEach(RegisterResponse::new);
         }
 
     }

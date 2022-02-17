@@ -2,9 +2,14 @@ package com.example.demo.interfaces.postIt;
 
 import com.example.demo.application.postIt.PostItFacade;
 import com.example.demo.common.response.CommonResponse;
+import com.example.demo.domain.postIt.PostItCommand;
+import com.example.demo.domain.postIt.PostItInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -27,5 +32,26 @@ public class PostItApiController {
         var postItResponse = new PostItDto.RegisterResponse(postItInfo);
         return CommonResponse.success(postItResponse);
     }
+
+    @PostMapping("/register/batch")
+    public CommonResponse registerPostItBatch(@RequestBody PostItDto.RegisterBatchRequest registerBatchRequest) {
+        //1. registerBatchRequest 의 각각의 항목을 command 로 변환
+        //2. postItFacade 에서 command 등록
+        //3. 결과로 나온 postItInfo -> registerBatchResponse 로 변환
+        //4. CommonResponse 로 감싸서 return
+        List<PostItCommand.RegisterPostIt> postItCommandList = new ArrayList<>();
+        registerBatchRequest.getRegisterRequestList().forEach(registerRequest -> {
+            postItCommandList.add(postItDtoMapper.of(registerRequest));
+        });
+
+        List<PostItInfo.Main> postItInfoList = new ArrayList<>();
+        postItCommandList.forEach(postItCommand -> {
+            postItInfoList.add(postItFacade.registerPostIt(postItCommand));
+        });
+
+        var postItResponse = new PostItDto.RegisterBatchResponse(postItInfoList);
+        return CommonResponse.success(postItResponse);
+    }
+
 
 }

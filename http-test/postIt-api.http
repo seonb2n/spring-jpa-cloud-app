@@ -3,8 +3,8 @@ POST http://localhost:8080/api/v1/postits/register
 Content-Type: application/json
 
 {
-  "userToken": "user_FivxZzcy3Jjr1IM",
-  "content": "test-postIt",
+  "userToken": "user_lgjeLWlc5jjq7pn",
+  "content": "test-postIt2",
   "status": "INCOMPLETE"
 
 }
