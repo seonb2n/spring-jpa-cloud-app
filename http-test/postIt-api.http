@@ -8,3 +8,30 @@ Content-Type: application/json
   "status": "INCOMPLETE"
 
 }
+
+### 포스트잇 대량 등록
+POST http://localhost:8080/api/v1/postits/register/batch
+Content-Type: application/json
+
+{
+  "registerRequestList" : [
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    },
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    },
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    }
+  ]
+}

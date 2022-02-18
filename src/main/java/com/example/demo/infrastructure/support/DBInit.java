@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 초기 테스트 데이터를 넣어주는 class
  */
@@ -36,15 +39,34 @@ public class DBInit implements CommandLineRunner {
         userStore.store(defaultUser);
 
         User user = userReader.getUserWithUserEmail("abc123@naver.com");
+        String userToken = user.getUserToken();
 
         PostIt postIt1 = PostIt.builder()
                 .user(user)
-                .userToken(user.getUserToken())
-                .content("test-postIt")
+                .userToken(userToken)
+                .content("test-postIt1")
                 .status("INCOMPLETE")
                 .build();
 
-        postItStore.store(postIt1);
+        PostIt postIt2 = PostIt.builder()
+                .user(user)
+                .userToken(userToken)
+                .content("test-postIt2")
+                .status("INCOMPLETE")
+                .build();
 
+        PostIt postIt3 = PostIt.builder()
+                .user(user)
+                .userToken(userToken)
+                .content("test-postIt3")
+                .status("INCOMPLETE")
+                .build();
+
+        List<PostIt> postItList = new ArrayList<>();
+        postItList.add(postIt1);
+        postItList.add(postIt2);
+        postItList.add(postIt3);
+
+        postItStore.storeAll(postItList);
     }
 }
