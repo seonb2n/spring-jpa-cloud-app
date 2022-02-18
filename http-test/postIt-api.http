@@ -3,8 +3,35 @@ POST http://localhost:8080/api/v1/postits/register
 Content-Type: application/json
 
 {
-  "userToken": "user_U3CgjKw07KcQP3U",
-  "content": "test-postIt",
+  "userToken": "user_lgjeLWlc5jjq7pn",
+  "content": "test-postIt2",
   "status": "INCOMPLETE"
 
+}
+
+### 포스트잇 대량 등록
+POST http://localhost:8080/api/v1/postits/register/batch
+Content-Type: application/json
+
+{
+  "registerRequestList" : [
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    },
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    },
+    {
+      "userToken": "user_SqRW1EglmG2PG2F",
+      "content": "test-postIt2",
+      "status": "INCOMPLETE"
+
+    }
+  ]
 }

@@ -9,3 +9,11 @@ Content-Type: application/json
   "startDayTime": "09:00",
   "endDayTime": "16:00"
 }
+
+### 사용자 검색
+POST http://localhost:8080/api/v1/users/getuser
+Content-Type: application/json
+
+{
+  "userToken": "user_lgjeLWlc5jjq7pn"
+}

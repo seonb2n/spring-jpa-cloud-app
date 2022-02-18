@@ -16,8 +16,14 @@ public class UserReaderImpl implements UserReader {
     private final UserRepository userRepository;
 
     @Override
-    public User getUser(String userToken) {
+    public User getUserWithUserToken(String userToken) {
         return userRepository.findByUserToken(userToken)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public User getUserWithUserEmail(String userEmail) {
+        return userRepository.findUserByUserEmail(userEmail)
                 .orElseThrow(EntityNotFoundException::new);
     }
 }

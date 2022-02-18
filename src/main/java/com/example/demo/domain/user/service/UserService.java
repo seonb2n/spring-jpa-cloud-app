@@ -5,4 +5,6 @@ import com.example.demo.domain.user.UserInfo;
 
 public interface UserService {
     UserInfo.Main registerUser(UserCommand.RegisterUser registerUserCommand);
+
+    UserInfo.Main getUser(String userToken);
 }

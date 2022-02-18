@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  PostIt data output 을 처리하는 info
  **/
@@ -27,6 +30,19 @@ public class PostItInfo {
             this.content = postIt.getContent();
             this.status = postIt.getStatus();
         }
+    }
+
+    @Getter
+    @ToString
+    public static class PostItList {
+
+        List<Main> postItInfoList;
+
+        public PostItList(List<PostIt> postItList) {
+            postItInfoList = new ArrayList<>();
+            postItList.forEach(postIt -> postItInfoList.add(new Main(postIt)));
+        }
+
     }
 
 
