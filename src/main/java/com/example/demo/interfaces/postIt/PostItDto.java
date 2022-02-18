@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,8 +63,9 @@ public class PostItDto {
 
         private List<RegisterResponse> registerResponses;
 
-        public RegisterBatchResponse(List<PostItInfo.Main> postItInfoList) {
-            postItInfoList.forEach(RegisterResponse::new);
+        public RegisterBatchResponse(PostItInfo.PostItList postItList) {
+            registerResponses = new ArrayList<>();
+            postItList.getPostItInfoList().forEach(postItInfo -> registerResponses.add(new RegisterResponse(postItInfo)));
         }
 
     }

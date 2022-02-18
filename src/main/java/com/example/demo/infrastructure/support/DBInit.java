@@ -37,13 +37,14 @@ public class DBInit implements CommandLineRunner {
 
         User user = userReader.getUserWithUserEmail("abc123@naver.com");
 
-        PostIt postIt = PostIt.builder()
+        PostIt postIt1 = PostIt.builder()
                 .user(user)
                 .userToken(user.getUserToken())
                 .content("test-postIt")
                 .status("INCOMPLETE")
                 .build();
 
-        postItStore.store(postIt);
+        postItStore.store(postIt1);
+
     }
 }

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -16,5 +18,10 @@ public class PostItStoreImpl implements PostItStore {
     @Override
     public PostIt store(PostIt initPostIt) {
         return postItRepository.save(initPostIt);
+    }
+
+    @Override
+    public List<PostIt> storeAll(List<PostIt> postItList) {
+        return postItRepository.saveAll(postItList);
     }
 }
