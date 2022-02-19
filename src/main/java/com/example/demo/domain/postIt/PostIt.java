@@ -2,8 +2,10 @@ package com.example.demo.domain.postIt;
 
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
+import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
+@Table(name = "postits")
 public class PostIt extends BaseEntity {
     private static final String PREFIX_POSTIT = "postIt_";
 
@@ -27,6 +29,12 @@ public class PostIt extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
     private String userToken;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private String content;
     private PostItStatus status;
