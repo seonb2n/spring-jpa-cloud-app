@@ -24,6 +24,7 @@ public class PostItInfo {
         private final String content;
         private final PostIt.PostItStatus status;
         private final Category category;
+        private final String categoryName;
 
         public Main(PostIt postIt) {
             this.postItId = postIt.getId();
@@ -32,6 +33,7 @@ public class PostItInfo {
             this.content = postIt.getContent();
             this.status = postIt.getStatus();
             this.category = postIt.getCategory();
+            this.categoryName = postIt.getCategoryName();
         }
     }
 

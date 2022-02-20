@@ -72,4 +72,8 @@ public class User extends BaseEntity {
     public void changePassword(String password) {
         this.password = password;
     }
+
+    public void changeUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 }

@@ -37,6 +37,7 @@ public class PostItCommand {
                     .content(content)
                     .status(status)
                     .category(category)
+                    .categoryName(categoryName)
                     .build();
         }
 

@@ -5,6 +5,7 @@ import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -34,6 +35,7 @@ public class PostIt extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    private String categoryName;
 
     private String content;
     private PostItStatus status;
@@ -48,13 +50,18 @@ public class PostIt extends BaseEntity {
     }
 
     @Builder
-    public PostIt(User user, String userToken, String content, String status, Category category) {
+    public PostIt(User user, String userToken, String content, String status, Category category, String categoryName) {
 
         this.postItToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_POSTIT);
         this.user = user;
         this.userToken = userToken;
         this.content = content;
         this.category = category;
+        if(categoryName == null) {
+            this.categoryName = category.getCategoryName();
+        } else {
+            this.categoryName = categoryName;
+        }
         changePostItStatus(status);
     }
 
