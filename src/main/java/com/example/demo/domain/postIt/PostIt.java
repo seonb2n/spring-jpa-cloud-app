@@ -32,7 +32,6 @@ public class PostIt extends BaseEntity {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -49,12 +48,13 @@ public class PostIt extends BaseEntity {
     }
 
     @Builder
-    public PostIt(User user, String userToken, String content, String status) {
+    public PostIt(User user, String userToken, String content, String status, Category category) {
 
         this.postItToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_POSTIT);
         this.user = user;
         this.userToken = userToken;
         this.content = content;
+        this.category = category;
         changePostItStatus(status);
     }
 

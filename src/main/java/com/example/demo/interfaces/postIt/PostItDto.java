@@ -2,6 +2,7 @@ package com.example.demo.interfaces.postIt;
 
 import com.example.demo.domain.postIt.PostIt;
 import com.example.demo.domain.postIt.PostItInfo;
+import com.example.demo.domain.postIt.category.Category;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +27,7 @@ public class PostItDto {
         @NotEmpty(message = "내용이 비어 있으면 안됩니다.")
         private String content;
         private String status;
+        private String categoryName;
     }
 
     @Getter
@@ -37,6 +39,7 @@ public class PostItDto {
         private final String userToken;
         private final String content;
         private final PostIt.PostItStatus status;
+        private final Category category;
 
         public RegisterResponse(PostItInfo.Main postItInfo) {
             this.postItId = postItInfo.getPostItId();
@@ -44,6 +47,7 @@ public class PostItDto {
             this.userToken = postItInfo.getUserToken();
             this.content = postItInfo.getContent();
             this.status = postItInfo.getStatus();
+            this.category = postItInfo.getCategory();
         }
     }
 
