@@ -44,4 +44,9 @@ public class Category extends BaseEntity {
         postItList.add(postIt);
 
     }
+
+    public Category(String categoryName) {
+        this.categoryToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_CATEGORY);
+        this.categoryName = categoryName;
+    }
 }

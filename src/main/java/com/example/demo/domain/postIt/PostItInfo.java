@@ -1,5 +1,6 @@
 package com.example.demo.domain.postIt;
 
+import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class PostItInfo {
         private final String userToken;
         private final String content;
         private final PostIt.PostItStatus status;
+        private final Category category;
 
         public Main(PostIt postIt) {
             this.postItId = postIt.getId();
@@ -29,6 +31,7 @@ public class PostItInfo {
             this.userToken = postIt.getUserToken();
             this.content = postIt.getContent();
             this.status = postIt.getStatus();
+            this.category = postIt.getCategory();
         }
     }
 
