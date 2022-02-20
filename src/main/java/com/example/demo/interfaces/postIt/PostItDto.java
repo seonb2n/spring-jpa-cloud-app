@@ -39,7 +39,7 @@ public class PostItDto {
         private final String userToken;
         private final String content;
         private final PostIt.PostItStatus status;
-        private final Category category;
+        private final String categoryName;
 
         public RegisterResponse(PostItInfo.Main postItInfo) {
             this.postItId = postItInfo.getPostItId();
@@ -47,7 +47,7 @@ public class PostItDto {
             this.userToken = postItInfo.getUserToken();
             this.content = postItInfo.getContent();
             this.status = postItInfo.getStatus();
-            this.category = postItInfo.getCategory();
+            this.categoryName = postItInfo.getCategoryName();
         }
     }
 

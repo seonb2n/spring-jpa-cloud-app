@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/postits/register
 Content-Type: application/json
 
 {
-  "userToken": "user_7Mp4fjKkG7FI3tQ",
+  "userToken": "user_1234",
   "content": "test-postIt3",
   "status": "INCOMPLETE",
   "categoryName" : "test-category"
@@ -16,13 +16,13 @@ Content-Type: application/json
 {
   "registerRequestList" : [
     {
-      "userToken": "user_7Mp4fjKkG7FI3tQ",
+      "userToken": "user_1234",
       "content": "test-postIt2",
       "status": "INCOMPLETE",
       "categoryName" : "test-category1"
     },
     {
-      "userToken": "user_7Mp4fjKkG7FI3tQ",
+      "userToken": "user_1234",
       "content": "test-postIt2",
       "status": "INCOMPLETE",
       "categoryName" : "test-category2"
