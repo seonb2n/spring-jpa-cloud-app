@@ -3,6 +3,8 @@ package com.example.demo.domain.user;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.postIt.PostIt;
+import com.example.demo.domain.project.Project;
+import com.example.demo.domain.task.Task;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,10 @@ public class User extends BaseEntity {
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<PostIt> postItList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Project> projectList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
