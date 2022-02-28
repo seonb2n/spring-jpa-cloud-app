@@ -2,7 +2,7 @@ package com.example.demo.domain.project;
 
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
-import com.example.demo.domain.task.Task;
+import com.example.demo.domain.project.task.Task;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -44,8 +43,9 @@ public class Project extends BaseEntity {
     private List<Task> taskList = new ArrayList<>();
 
     @Builder
-    public Project(String projectName, String endDayTime, List<Task> taskList) {
+    public Project(String projectName, String endDayTime, List<Task> taskList, User user) {
         this.projectToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROJECT);
+        this.user = user;
         this.projectName = projectName;
         this.endDayTime = endDayTime;
         this.taskList = taskList;

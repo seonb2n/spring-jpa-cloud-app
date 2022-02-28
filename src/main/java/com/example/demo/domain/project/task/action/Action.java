@@ -1,11 +1,13 @@
-package com.example.demo.domain.task.action;
+package com.example.demo.domain.project.task.action;
 
 import com.example.demo.domain.BaseEntity;
-import com.example.demo.domain.task.Task;
+import com.example.demo.domain.project.task.Task;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.signature.qual.BinaryName;
 
 import javax.persistence.*;
 
@@ -25,4 +27,10 @@ public class Action extends BaseEntity {
     private Task task;
 
     private String content;
+
+    @Builder
+    public Action(Task task, String content) {
+        this.task = task;
+        this.content = content;
+    }
 }

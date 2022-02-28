@@ -2,7 +2,6 @@ package com.example.demo.domain.user;
 
 import com.example.demo.domain.postIt.PostIt;
 import com.example.demo.domain.project.Project;
-import com.example.demo.domain.task.Task;
 import lombok.Getter;
 import lombok.ToString;
 

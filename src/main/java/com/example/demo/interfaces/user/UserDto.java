@@ -2,7 +2,6 @@ package com.example.demo.interfaces.user;
 
 import com.example.demo.domain.postIt.PostIt;
 import com.example.demo.domain.project.Project;
-import com.example.demo.domain.task.Task;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserInfo;
 import lombok.Getter;
