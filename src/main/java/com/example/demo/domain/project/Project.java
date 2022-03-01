@@ -25,7 +25,7 @@ public class Project extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long projectId;
     private String projectToken;
 
     @JsonBackReference
