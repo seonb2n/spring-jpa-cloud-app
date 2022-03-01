@@ -1,6 +1,7 @@
 package com.example.demo.interfaces.user;
 
 import com.example.demo.domain.postIt.PostIt;
+import com.example.demo.domain.project.Project;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserInfo;
 import lombok.Getter;
@@ -74,6 +75,7 @@ public class UserDto {
         private final String endDayTime;
         private final User.UserStatus status;
         private final List<PostIt> postItList;
+        private final List<Project> projectList;
 
         public GetWithTokenResponse(UserInfo.Main userInfo) {
             this.userToken = userInfo.getUserToken();
@@ -84,6 +86,7 @@ public class UserDto {
             this.endDayTime = userInfo.getEndDayTime();
             this.status = userInfo.getStatus();
             this.postItList = userInfo.getPostItList();
+            this.projectList = userInfo.getProjectList();
         }
     }
 

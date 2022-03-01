@@ -1,6 +1,7 @@
 package com.example.demo.domain.user;
 
 import com.example.demo.domain.postIt.PostIt;
+import com.example.demo.domain.project.Project;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -24,6 +25,7 @@ public class UserInfo {
         private final String endDayTime;
         private final User.UserStatus status;
         private final List<PostIt> postItList;
+        private final List<Project> projectList;
 
         public Main(User user) {
             this.userId = user.getId();
@@ -35,6 +37,7 @@ public class UserInfo {
             this.endDayTime = user.getEndDayTime();
             this.status = user.getStatus();
             this.postItList = user.getPostItList();
+            this.projectList = user.getProjectList();
         }
 
     }
