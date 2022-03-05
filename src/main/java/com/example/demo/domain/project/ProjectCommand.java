@@ -18,7 +18,7 @@ public class ProjectCommand {
         private String userToken;
         private String projectName;
         private String endDayTime;
-        private List<Task> taskList;
+        private List<RegisterTask> registerTaskList;
 
         public Project toEntity(User user) {
             return Project.builder()
@@ -38,11 +38,17 @@ public class ProjectCommand {
         private String importance;
         private String startDayTime;
         private String endDayTime;
-        private Project project;
+        private String projectToken;
+        private List<RegisterAction> registerActionList;
 
         public Task toEntity(Project project) {
             Task.Importance enumImportance;
+
             //project 가 지정되어 있지 않은 경우의 처리가 필요하다.
+            if(projectToken == null) {
+
+            }
+
             if(importance.equals("HIGH")) {
                 enumImportance = Task.Importance.HIGH;
             }
@@ -67,6 +73,7 @@ public class ProjectCommand {
     @ToString
     public static class RegisterAction {
 
+        private String taskToken;
         private String content;
         private Task task;
 
