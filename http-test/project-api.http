@@ -1,0 +1,38 @@
+### 프로젝트 등록
+POST http://localhost:8080/api/v1/projects/register/project
+Content-Type: application/json
+
+{
+  "userToken": "user_1234",
+  "projectName": "test-project",
+  "endDayTime": "22-10-10-15:00",
+  "registerTaskList" : [
+  ]
+}
+
+### 프로젝트 및 태스크 등록
+POST http://localhost:8080/api/v1/projects/register/project
+Content-Type: application/json
+
+{
+  "userToken": "user_1234",
+  "projectName": "test-project",
+  "endDayTime": "22-10-10-15:00",
+  "registerTaskList" : [
+    {
+      "taskName": "test-task",
+      "importance" : "HIGH",
+      "startDayTime" : "22-10-09-10:00",
+      "endDayTime" : "22-10-09-14:00",
+      "projectToken" : "",
+      "registerActionList" : [
+        {
+          "content" : "test-action1"
+        },
+        {
+          "content" : "test-action2"
+        }
+      ]
+    }
+  ]
+}

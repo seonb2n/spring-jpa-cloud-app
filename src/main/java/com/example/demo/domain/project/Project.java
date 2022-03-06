@@ -43,12 +43,13 @@ public class Project extends BaseEntity {
     private List<Task> taskList = new ArrayList<>();
 
     @Builder
-    public Project(String projectName, String endDayTime, List<Task> taskList, User user) {
+    public Project(String projectName, String endDayTime, List<Task> taskList, User user, String userToken) {
         this.projectToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROJECT);
         this.user = user;
+        this.userToken = userToken;
         this.projectName = projectName;
         this.endDayTime = endDayTime;
-        this.taskList = taskList;
+        this.taskList = new ArrayList<>();
     }
 
 }
