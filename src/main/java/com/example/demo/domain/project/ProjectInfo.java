@@ -6,6 +6,8 @@ import com.example.demo.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectInfo {
@@ -20,7 +22,7 @@ public class ProjectInfo {
         private final String userToken;
         private final String projectName;
         private final String endDayTime;
-        private final List<Task> taskList;
+        private final List<TaskInfo> taskList;
 
         public Main(Project project) {
             this.projectId = project.getProjectId();
@@ -29,7 +31,8 @@ public class ProjectInfo {
             this.userToken = project.getUserToken();
             this.projectName = project.getProjectName();
             this.endDayTime = project.getEndDayTime();
-            this.taskList = project.getTaskList();
+            this.taskList = new ArrayList<>();
+            project.getTaskList().forEach(task -> this.taskList.add(new TaskInfo(project, task)));
         }
     }
 
@@ -44,7 +47,7 @@ public class ProjectInfo {
         private final String startDayTime;
         private final String endDayTime;
         private final Project project;
-        private final List<Action> actionList;
+        private final List<ActionInfo> actionList;
 
         public TaskInfo(Project project, Task task) {
             this.taskId = task.getId();
@@ -58,7 +61,9 @@ public class ProjectInfo {
             } else {
                 this.project = task.getProject();
             }
-            this.actionList = task.getActionList();
+
+            this.actionList = new ArrayList<>();
+            task.getActionList().forEach(action -> this.actionList.add(new ActionInfo(task, action)));
         }
     }
 
@@ -67,6 +72,7 @@ public class ProjectInfo {
     @ToString
     public static class ActionInfo {
         private Long actionId;
+        private String actionToken;
         private Task task;
         private String content;
 
@@ -74,6 +80,7 @@ public class ProjectInfo {
             this.actionId = action.getId();
             this.task = task;
             this.content = action.getContent();
+            this.actionToken = action.getActionToken();
         }
     }
 }

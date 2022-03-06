@@ -1,5 +1,6 @@
 package com.example.demo.domain.project.task.action;
 
+import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.project.task.Task;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -18,9 +19,12 @@ import javax.persistence.*;
 @Table(name = "actions")
 public class Action extends BaseEntity {
 
+    private static final String PREFIX_ACTION = "action_";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String actionToken;
 
     @ManyToOne
     @JsonBackReference
@@ -30,6 +34,7 @@ public class Action extends BaseEntity {
 
     @Builder
     public Action(Task task, String content) {
+        this.actionToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_ACTION);
         this.task = task;
         this.content = content;
     }
