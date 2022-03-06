@@ -56,7 +56,7 @@ public class ProjectCommand {
             }
 
             //project 가 지정되어 있지 않은 경우의 처리가 필요하다.
-            if(projectToken == null) {
+            if(projectToken == null || projectToken.equals("")) {
                 return Task.builder()
                         .project(project)
                         .projectToken(project.getProjectToken())
@@ -87,9 +87,19 @@ public class ProjectCommand {
         private String content;
 
         public Action toEntity(Task task) {
+
+            if(taskToken == null || taskToken.equals("")) {
+                return Action.builder()
+                        .content(content)
+                        .task(task)
+                        .taskToken(task.getTaskToken())
+                        .build();
+            }
+
             return Action.builder()
                     .content(content)
                     .task(task)
+                    .taskToken(taskToken)
                     .build();
         }
 

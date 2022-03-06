@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public class Task extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.PERSIST)
     @JsonManagedReference
-    private List<Action> actionList;
+    private List<Action> actionList = new ArrayList<>();
 
     @Getter
     @RequiredArgsConstructor

@@ -28,13 +28,15 @@ public class Action extends BaseEntity {
     @ManyToOne
     @JsonBackReference
     private Task task;
+    private String taskToken;
 
     private String content;
 
     @Builder
-    public Action(Task task, String content) {
+    public Action(Task task, String content, String taskToken) {
         this.actionToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_ACTION);
         this.task = task;
+        this.taskToken = taskToken;
         this.content = content;
     }
 }

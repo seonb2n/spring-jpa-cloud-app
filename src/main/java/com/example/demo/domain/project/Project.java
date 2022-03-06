@@ -40,7 +40,7 @@ public class Project extends BaseEntity {
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
-    private List<Task> taskList;
+    private List<Task> taskList = new ArrayList<>();
 
     @Builder
     public Project(String projectName, String endDayTime, List<Task> taskList, User user, String userToken) {
@@ -49,7 +49,7 @@ public class Project extends BaseEntity {
         this.userToken = userToken;
         this.projectName = projectName;
         this.endDayTime = endDayTime;
-        this.taskList = taskList;
+        this.taskList = new ArrayList<>();
     }
 
 }

@@ -21,10 +21,10 @@ public class ProjectSeriesFactoryImpl implements ProjectSeriesFactory {
     public Project storeProject(User user, ProjectCommand.RegisterProject registerProject) {
        //프로젝트 하위의 task 와 action 에 대해서 entity 화 해서 저장
         Project initProject = projectStore.store(registerProject.toEntity(user));
-        registerProject.getRegisterTaskList().forEach(registerTask -> {
-            initProject.getTaskList().add(storeTask(initProject, registerTask));
-        });
-        return initProject;
+        registerProject.getRegisterTaskList().forEach(registerTask ->
+            storeTask(initProject, registerTask)
+        );
+        return projectReader.getProjectWithToken(initProject.getProjectToken());
     }
 
     //task 와 하위에 있는 action 까지 모두 저장할 때 사용
