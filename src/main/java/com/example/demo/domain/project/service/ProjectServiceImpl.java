@@ -52,4 +52,10 @@ public class ProjectServiceImpl implements ProjectService{
         Action initAction = projectSeriesFactory.storeAction(task, registerAction);
         return projectInfoMapper.of(initAction);
     }
+
+    @Override
+    public ProjectInfo.Main retrieveProject(String projectToken) {
+        Project project = projectReader.getProjectWithToken(projectToken);
+        return projectInfoMapper.of(project, project.getTaskList());
+    }
 }
