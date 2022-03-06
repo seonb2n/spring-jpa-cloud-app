@@ -10,4 +10,6 @@ public interface ProjectService {
     ProjectInfo.TaskInfo registerTask(ProjectCommand.RegisterTask registerTask);
 
     ProjectInfo.ActionInfo registerAction(ProjectCommand.RegisterAction registerAction);
+
+    ProjectInfo.Main retrieveProject(String projectToken);
 }

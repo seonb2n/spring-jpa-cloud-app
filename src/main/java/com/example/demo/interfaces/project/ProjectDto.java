@@ -63,6 +63,15 @@ public class ProjectDto {
         private String content;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class GetProjectWithProjectToken{
+
+        private String projectToken;
+
+    }
+
     //조회 및 등록 결과에 대한 Project Response
     @Getter
     @Setter

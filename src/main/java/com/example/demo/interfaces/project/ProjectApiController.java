@@ -47,4 +47,11 @@ public class ProjectApiController {
         var registerResponse = projectDtoMapper.of(registerInfo);
         return CommonResponse.success(registerResponse);
     }
+
+    @PostMapping("/retrieve/project")
+    public CommonResponse retrieveProject(@RequestBody ProjectDto.GetProjectWithProjectToken projectWithProjectToken) {
+        var retrieveInfo = projectFacade.retrieveProject(projectWithProjectToken.getProjectToken());
+        var retrieveResponse = projectDtoMapper.of(retrieveInfo);
+        return CommonResponse.success(retrieveResponse);
+    }
 }

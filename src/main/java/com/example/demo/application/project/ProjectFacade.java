@@ -25,4 +25,8 @@ public class ProjectFacade {
     public ProjectInfo.ActionInfo registerAction(ProjectCommand.RegisterAction registerAction) {
         return projectService.registerAction(registerAction);
     }
+
+    public ProjectInfo.Main retrieveProject(String projectToken) {
+        return projectService.retrieveProject(projectToken);
+    }
 }

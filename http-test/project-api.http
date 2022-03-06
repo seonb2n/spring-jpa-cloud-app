@@ -10,7 +10,7 @@ Content-Type: application/json
   ]
 }
 
-### 프로젝트 및 태스크 등록
+### 프로젝트 및 태스크 및 액션 등록
 POST http://localhost:8080/api/v1/projects/register/project
 Content-Type: application/json
 
@@ -35,4 +35,12 @@ Content-Type: application/json
       ]
     }
   ]
+}
+
+### 프로젝트 토큰으로 검색
+POST http://localhost:8080/api/v1/projects/retrieve/project
+Content-Type: application/json
+
+{
+  "projectToken": "project_rUF0ijPmj5Xn"
 }
