@@ -7,6 +7,7 @@ import com.example.demo.domain.project.service.ProjectSeriesFactory;
 import com.example.demo.domain.project.service.ProjectStore;
 import com.example.demo.domain.project.task.Task;
 import com.example.demo.domain.project.task.action.Action;
+import com.example.demo.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,13 @@ public class ProjectSeriesFactoryImpl implements ProjectSeriesFactory {
     private final ProjectStore projectStore;
 
     @Override
-    public void storeProject(Project project, ProjectCommand.RegisterProject registerProject) {
+    public Project storeProject(User user, ProjectCommand.RegisterProject registerProject) {
        //프로젝트 하위의 task 와 action 에 대해서 entity 화 해서 저장
+        Project initProject = projectStore.store(registerProject.toEntity(user));
         registerProject.getRegisterTaskList().forEach(registerTask -> {
-            storeTask(project, registerTask);
+            initProject.getTaskList().add(storeTask(initProject, registerTask));
         });
+        return initProject;
     }
 
     //task 와 하위에 있는 action 까지 모두 저장할 때 사용

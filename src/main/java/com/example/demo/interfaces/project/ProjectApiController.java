@@ -28,7 +28,7 @@ public class ProjectApiController {
         // 4. CommonResponse 로 감싸서 return
         var registerCommand = projectDtoMapper.of(registerProjectRequest);
         var registerInfo = projectFacade.registerProject(registerCommand);
-        var registerResponse = new ProjectDto.Main(registerInfo);
+        var registerResponse = projectDtoMapper.of(registerInfo);
         return CommonResponse.success(registerResponse);
     }
 
@@ -36,7 +36,7 @@ public class ProjectApiController {
     public CommonResponse registerTask(@RequestBody ProjectDto.RegisterTaskRequest registerTaskRequest) {
         var registerCommand = projectDtoMapper.of(registerTaskRequest);
         var registerInfo = projectFacade.registerTask(registerCommand);
-        var registerResponse = new ProjectDto.Task(registerInfo);
+        var registerResponse = projectDtoMapper.of(registerInfo);
         return CommonResponse.success(registerResponse);
     }
 
@@ -44,7 +44,7 @@ public class ProjectApiController {
     public CommonResponse registerAction(@RequestBody ProjectDto.RegisterActionRequest registerActionRequest) {
         var registerCommand = projectDtoMapper.of(registerActionRequest);
         var registerInfo = projectFacade.registerAction(registerCommand);
-        var registerResponse = new ProjectDto.Action(registerInfo);
+        var registerResponse = projectDtoMapper.of(registerInfo);
         return CommonResponse.success(registerResponse);
     }
 }

@@ -2,6 +2,7 @@ package com.example.demo.interfaces.project;
 
 import com.example.demo.domain.postIt.PostItCommand;
 import com.example.demo.domain.project.ProjectCommand;
+import com.example.demo.domain.project.ProjectInfo;
 import com.example.demo.interfaces.postIt.PostItDto;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -18,4 +19,9 @@ public interface ProjectDtoMapper {
 
     ProjectCommand.RegisterAction of(ProjectDto.RegisterActionRequest registerActionRequest);
 
+    ProjectDto.Main of(ProjectInfo.Main projectMainInfo);
+
+    ProjectDto.Task of(ProjectInfo.TaskInfo taskInfo);
+
+    ProjectDto.Action of(ProjectInfo.ActionInfo actionInfo);
 }

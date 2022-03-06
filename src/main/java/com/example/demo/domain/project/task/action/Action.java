@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.signature.qual.BinaryName;
 
 import javax.persistence.*;
 
@@ -23,7 +22,7 @@ public class Action extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long actionId;
     private String actionToken;
 
     @ManyToOne

@@ -40,12 +40,13 @@ public class Project extends BaseEntity {
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
-    private List<Task> taskList = new ArrayList<>();
+    private List<Task> taskList;
 
     @Builder
-    public Project(String projectName, String endDayTime, List<Task> taskList, User user) {
+    public Project(String projectName, String endDayTime, List<Task> taskList, User user, String userToken) {
         this.projectToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROJECT);
         this.user = user;
+        this.userToken = userToken;
         this.projectName = projectName;
         this.endDayTime = endDayTime;
         this.taskList = taskList;

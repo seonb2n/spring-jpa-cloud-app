@@ -13,32 +13,21 @@ import java.util.List;
 public class ProjectInfo {
 
     @Getter
-    @Builder
     @ToString
+    @Builder
     public static class Main {
         private final Long projectId;
         private final String projectToken;
-        private final User user;
         private final String userToken;
         private final String projectName;
         private final String endDayTime;
         private final List<TaskInfo> taskList;
 
-        public Main(Project project) {
-            this.projectId = project.getProjectId();
-            this.projectToken = project.getProjectToken();
-            this.user = project.getUser();
-            this.userToken = project.getUserToken();
-            this.projectName = project.getProjectName();
-            this.endDayTime = project.getEndDayTime();
-            this.taskList = new ArrayList<>();
-            project.getTaskList().forEach(task -> this.taskList.add(new TaskInfo(project, task)));
-        }
     }
 
     @Getter
-    @Builder
     @ToString
+    @Builder
     public static class TaskInfo {
         private final Long taskId;
         private final String taskToken;
@@ -49,38 +38,16 @@ public class ProjectInfo {
         private final Project project;
         private final List<ActionInfo> actionList;
 
-        public TaskInfo(Project project, Task task) {
-            this.taskId = task.getId();
-            this.taskToken = task.getTaskToken();
-            this.taskName = task.getTaskName();
-            this.importance = task.getImportance().toString();
-            this.startDayTime = task.getStartDayTime();
-            this.endDayTime = task.getEndDayTime();
-            if(project == null) {
-                this.project = null;
-            } else {
-                this.project = task.getProject();
-            }
-
-            this.actionList = new ArrayList<>();
-            task.getActionList().forEach(action -> this.actionList.add(new ActionInfo(task, action)));
-        }
     }
 
     @Getter
     @Builder
     @ToString
     public static class ActionInfo {
-        private Long actionId;
-        private String actionToken;
-        private Task task;
-        private String content;
+        private final Long actionId;
+        private final String actionToken;
+        private final Task task;
+        private final String content;
 
-        public ActionInfo(Task task, Action action) {
-            this.actionId = action.getId();
-            this.task = task;
-            this.content = action.getContent();
-            this.actionToken = action.getActionToken();
-        }
     }
 }

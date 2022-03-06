@@ -65,8 +65,9 @@ public class ProjectDto {
 
     //조회 및 등록 결과에 대한 Project Response
     @Getter
-    @Builder
+    @Setter
     @ToString
+    @Builder
     public static class Main {
         private final Long projectId;
         private final String projectToken;
@@ -74,21 +75,12 @@ public class ProjectDto {
         private final String projectName;
         private final String endDayTime;
         private final List<Task> taskList;
-
-        public Main(ProjectInfo.Main main) {
-            this.projectId = main.getProjectId();
-            this.projectToken = main.getProjectToken();
-            this.userToken = main.getUserToken();
-            this.projectName = main.getProjectName();
-            this.endDayTime = main.getEndDayTime();
-            this.taskList = new ArrayList<>();
-            main.getTaskList().forEach(taskInfo -> taskList.add(new Task(taskInfo)));
-        }
     }
 
     @Getter
-    @Builder
+    @Setter
     @ToString
+    @Builder
     public static class Task {
         private final Long taskId;
         private final String taskToken;
@@ -97,32 +89,16 @@ public class ProjectDto {
         private final String startDayTime;
         private final String endDayTime;
         private final List<Action> actionList;
-
-        public Task(ProjectInfo.TaskInfo taskInfo) {
-            this.taskId = taskInfo.getTaskId();
-            this.taskToken = taskInfo.getTaskToken();
-            this.taskName = taskInfo.getTaskName();
-            this.importance = taskInfo.getImportance();
-            this.startDayTime = taskInfo.getStartDayTime();
-            this.endDayTime = taskInfo.getEndDayTime();
-            this.actionList = new ArrayList<>();
-            taskInfo.getActionList().forEach(actionInfo -> actionList.add(new Action(actionInfo)));
-        }
     }
 
     @Getter
+    @Setter
     @Builder
     @ToString
     public static class Action {
         private final Long actionId;
         private final String actionToken;
         private final String content;
-
-        public Action(ProjectInfo.ActionInfo actionInfo) {
-            this.actionId = actionInfo.getActionId();
-            this.content = actionInfo.getContent();
-            this.actionToken = actionInfo.getActionToken();
-        }
     }
 
 }

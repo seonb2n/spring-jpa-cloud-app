@@ -3,6 +3,7 @@ package com.example.demo.domain.project.service;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.ProjectCommand;
 import com.example.demo.domain.project.ProjectInfo;
+import com.example.demo.domain.project.ProjectInfoMapper;
 import com.example.demo.domain.project.task.Task;
 import com.example.demo.domain.project.task.action.Action;
 import com.example.demo.domain.user.User;
@@ -20,6 +21,7 @@ public class ProjectServiceImpl implements ProjectService{
     private final ProjectStore projectStore;
     private final UserReader userReader;
     private final ProjectSeriesFactory projectSeriesFactory;
+    private final ProjectInfoMapper projectInfoMapper;
 
     @Override
     public ProjectInfo.Main registerProject(ProjectCommand.RegisterProject registerProject) {
@@ -27,9 +29,8 @@ public class ProjectServiceImpl implements ProjectService{
         // 2. save entity
         // 3. entity -> info and return
         User user = userReader.getUserWithUserToken(registerProject.getUserToken());
-        Project project = projectStore.store(registerProject.toEntity(user));
-        projectSeriesFactory.storeProject(project, registerProject);
-        return new ProjectInfo.Main(project);
+        Project project = projectSeriesFactory.storeProject(user, registerProject);
+        return projectInfoMapper.of(project, project.getTaskList());
     }
 
     @Override
@@ -39,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService{
         // 3. entity -> info and return
         Project project = projectReader.getProjectWithToken(registerTask.getProjectToken());
         Task initTask = projectSeriesFactory.storeTask(project, registerTask);
-        return new ProjectInfo.TaskInfo(project, initTask);
+        return projectInfoMapper.of(initTask);
     }
 
     @Override
@@ -49,6 +50,6 @@ public class ProjectServiceImpl implements ProjectService{
         // 3. entity -> info and return
         Task task = projectReader.getTaskWithToken(registerAction.getTaskToken());
         Action initAction = projectSeriesFactory.storeAction(task, registerAction);
-        return new ProjectInfo.ActionInfo(task, initAction);
+        return projectInfoMapper.of(initAction);
     }
 }
