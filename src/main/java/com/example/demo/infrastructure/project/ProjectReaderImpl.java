@@ -4,6 +4,7 @@ import com.example.demo.common.exception.EntityNotFoundException;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.service.ProjectReader;
 import com.example.demo.domain.project.task.Task;
+import com.example.demo.domain.project.task.action.Action;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ProjectReaderImpl implements ProjectReader {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
+    private final ActionRepository actionRepository;
 
     @Override
     public Project getProjectWithToken(String projectToken) {
@@ -31,6 +33,12 @@ public class ProjectReaderImpl implements ProjectReader {
     @Override
     public Task getTaskWithToken(String taskToken) {
         return taskRepository.findTaskByTaskToken(taskToken)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public Action getActionWithToken(String actionToken) {
+        return actionRepository.findActionByActionToken(actionToken)
                 .orElseThrow(EntityNotFoundException::new);
     }
 }

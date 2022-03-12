@@ -1,9 +1,6 @@
 package com.example.demo.interfaces.project;
 
-import com.example.demo.domain.project.Project;
-import com.example.demo.domain.project.ProjectInfo;
-import com.example.demo.domain.project.task.Task;
-import com.example.demo.domain.user.User;
+import com.example.demo.domain.project.task.action.Action;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,7 +58,64 @@ public class ProjectDto {
 
         @NotNull(message = "액션 내용을 추가해주셔야 합니다.")
         private String content;
+
     }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class UpdateProjectRequest {
+
+        @NotNull(message = "UserToken 이 필요합니다")
+        private String userToken;
+
+        private String projectToken;
+
+        @NotNull(message = "Project 이름은 필수값입니다.")
+        private String projectName;
+
+        private String endDayTime;
+
+        private List<UpdateTaskRequest> updateTaskList;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class UpdateTaskRequest {
+        private String taskToken;
+
+        @NotNull(message = "Task 이름은 필수값입니다.")
+        private String taskName;
+
+        private String importance;
+
+        private String startDayTime;
+
+        private String endDayTime;
+
+        private String projectToken;
+
+        private List<UpdateActionRequest> updateActionList;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class UpdateActionRequest {
+
+        private String taskToken;
+
+        private String actionToken;
+
+        @NotNull(message = "액션 내용을 추가해주셔야 합니다.")
+        private String content;
+
+        private String actionStatus;
+    }
+
 
     @Getter
     @Setter
@@ -108,6 +162,7 @@ public class ProjectDto {
         private final Long actionId;
         private final String actionToken;
         private final String content;
+        private final com.example.demo.domain.project.task.action.Action.ActionStatus actionStatus;
     }
 
 }

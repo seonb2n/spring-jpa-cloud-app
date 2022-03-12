@@ -5,6 +5,7 @@ import com.example.demo.domain.project.task.action.Action;
 import com.example.demo.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import java.util.List;
 
@@ -43,35 +44,22 @@ public class ProjectCommand {
         private List<RegisterAction> registerActionList;
 
         public Task toEntity(Project project) {
-            Task.Importance enumImportance;
-
-            if(importance.equals("HIGH")) {
-                enumImportance = Task.Importance.HIGH;
-            }
-            else if(importance.equals("MIDDLE")) {
-                enumImportance = Task.Importance.MIDDLE;
-            }
-            else {
-                enumImportance = Task.Importance.LOW;
-            }
-
             //project 가 지정되어 있지 않은 경우의 처리가 필요하다.
             if(projectToken == null || projectToken.equals("")) {
                 return Task.builder()
                         .project(project)
                         .projectToken(project.getProjectToken())
-                        .importance(enumImportance)
+                        .importance(importance)
                         .taskName(taskName)
                         .startDayTime(startDayTime)
                         .endDayTime(endDayTime)
                         .build();
             }
-
             return Task.builder()
                     .project(project)
                     .projectToken(projectToken)
                     .taskName(taskName)
-                    .importance(enumImportance)
+                    .importance(importance)
                     .startDayTime(startDayTime)
                     .endDayTime(endDayTime)
                     .build();
@@ -87,21 +75,80 @@ public class ProjectCommand {
         private String content;
 
         public Action toEntity(Task task) {
-
+            Action initAction;
             if(taskToken == null || taskToken.equals("")) {
-                return Action.builder()
+                initAction = Action.builder()
                         .content(content)
                         .task(task)
                         .taskToken(task.getTaskToken())
+                        .actionStatus("UNDONE")
+                        .build();
+            }
+            else {
+                initAction =  Action.builder()
+                        .content(content)
+                        .task(task)
+                        .taskToken(taskToken)
+                        .actionStatus("UNDONE")
                         .build();
             }
 
-            return Action.builder()
-                    .content(content)
-                    .task(task)
-                    .taskToken(taskToken)
-                    .build();
+            return initAction;
         }
 
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateProject {
+        private String userToken;
+        private String projectToken;
+        private String projectName;
+        private String endDayTime;
+        private List<UpdateTask> updateTaskList;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateTask {
+        private String taskToken;
+        private String taskName;
+        private String importance;
+        private String startDayTime;
+        private String endDayTime;
+        private String projectToken;
+        private List<UpdateAction> updateActionList;
+
+        public Task toEntity(Project project) {
+            return Task.builder()
+                    .taskName(taskName)
+                    .project(project)
+                    .projectToken(projectToken)
+                    .importance(importance)
+                    .startDayTime(startDayTime)
+                    .endDayTime(endDayTime)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateAction {
+        private String taskToken;
+        private String actionToken;
+        private String content;
+        private String actionStatus;
+
+        public Action toEntity(Task task) {
+            return Action.builder()
+                    .task(task)
+                    .taskToken(taskToken)
+                    .content(content)
+                    .actionStatus(actionStatus)
+                    .build();
+        }
     }
 }

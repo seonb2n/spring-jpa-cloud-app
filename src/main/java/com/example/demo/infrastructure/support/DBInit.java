@@ -5,6 +5,9 @@ import com.example.demo.domain.postIt.PostIt;
 import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.postIt.category.service.CategoryStore;
 import com.example.demo.domain.postIt.service.PostItStore;
+import com.example.demo.domain.project.Project;
+import com.example.demo.domain.project.service.ProjectReader;
+import com.example.demo.domain.project.service.ProjectStore;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserCommand;
 import com.example.demo.domain.user.service.UserReader;
@@ -33,6 +36,8 @@ public class DBInit implements CommandLineRunner {
     private final PostItStore postItStore;
     private final CategoryRepository categoryRepository;
     private final UserFacade userFacade;
+    private final ProjectReader projectReader;
+    private final ProjectStore projectStore;
 
     @Override
     public void run(String... args) throws Exception {
@@ -44,9 +49,17 @@ public class DBInit implements CommandLineRunner {
                 .password("1234")
                 .build();
         userFacade.registerUser(registerUser);
-
         User user = userReader.getUserWithUserEmail("test-user@naver.com");
         user.changeUserToken("user_1234");
         userStore.store(user);
+
+        Project project = Project.builder()
+                .projectName("test-project")
+                .user(user)
+                .userToken("user_1234")
+                .projectName("test-project1234")
+                .build();
+        project.changeProjectToken("project_1234");
+        projectStore.store(project);
     }
 }

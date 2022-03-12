@@ -48,6 +48,6 @@ public class ProjectInfo {
         private final String actionToken;
         private final Task task;
         private final String content;
-
+        private final Action.ActionStatus actionStatus;
     }
 }

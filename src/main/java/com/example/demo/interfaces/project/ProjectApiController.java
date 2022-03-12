@@ -31,11 +31,25 @@ public class ProjectApiController {
         return CommonResponse.success(registerToken);
     }
 
+    @PostMapping("/update/project")
+    public CommonResponse updateProject(@RequestBody ProjectDto.UpdateProjectRequest updateProjectRequest) {
+        var updateCommand = projectDtoMapper.of(updateProjectRequest);
+        var updateToken = projectFacade.updateProject(updateCommand);
+        return CommonResponse.success(updateToken);
+    }
+
     @PostMapping("/register/task")
     public CommonResponse registerTask(@RequestBody ProjectDto.RegisterTaskRequest registerTaskRequest) {
         var registerCommand = projectDtoMapper.of(registerTaskRequest);
         var registerToken = projectFacade.registerTask(registerCommand);
         return CommonResponse.success(registerToken);
+    }
+
+    @PostMapping("/update/task")
+    public CommonResponse updateTask(@RequestBody ProjectDto.UpdateTaskRequest updateTaskRequest) {
+        var updateCommand = projectDtoMapper.of(updateTaskRequest);
+        var updateToken = projectFacade.updateTask(updateCommand);
+        return CommonResponse.success(updateToken);
     }
 
     @PostMapping("/register/action")

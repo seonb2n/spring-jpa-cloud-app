@@ -3,6 +3,7 @@ package com.example.demo.domain.project.task;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.project.Project;
+import com.example.demo.domain.project.ProjectCommand;
 import com.example.demo.domain.project.task.action.Action;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -55,15 +56,37 @@ public class Task extends BaseEntity {
         private final String description;
     }
 
+    private void changeImportance(String importance) {
+        switch (importance) {
+            case "HIGH" : this.importance = Importance.HIGH;
+                            break;
+            case "MIDDLE" : this.importance = Importance.MIDDLE;
+                            break;
+            case "LOW" : this.importance = Importance.LOW;
+                            break;
+            default:
+                            break;
+        }
+    }
+
     @Builder
-    public Task(String taskName, Importance importance, String startDayTime, String endDayTime, Project project, String projectToken, List<Action> actionList) {
+    public Task(String taskName, String importance, String startDayTime, String endDayTime, Project project, String projectToken, List<Action> actionList) {
         taskToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_TASK);
         this.taskName = taskName;
-        this.importance = importance;
         this.startDayTime = startDayTime;
         this.endDayTime = endDayTime;
         this.project = project;
+        changeImportance(importance);
         this.projectToken = projectToken;
         this.actionList = actionList;
+    }
+
+    public void updateTask(Project project, ProjectCommand.UpdateTask updateTask) {
+        this.project = project;
+        this.projectToken = project.getProjectToken();
+        this.taskName = updateTask.getTaskName();
+        changeImportance(updateTask.getImportance());
+        this.startDayTime = updateTask.getStartDayTime();
+        this.endDayTime = updateTask.getEndDayTime();
     }
 }

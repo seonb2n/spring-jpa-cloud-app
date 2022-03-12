@@ -52,4 +52,13 @@ public class Project extends BaseEntity {
         this.taskList = new ArrayList<>();
     }
 
+    public void updateProject(ProjectCommand.UpdateProject updateProject) {
+        this.projectName = updateProject.getProjectName();
+        this.endDayTime = updateProject.getEndDayTime();
+    }
+
+    public void changeProjectToken(String projectToken) {
+        this.projectToken = projectToken;
+    }
+
 }

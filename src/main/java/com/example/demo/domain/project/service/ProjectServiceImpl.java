@@ -20,7 +20,8 @@ public class ProjectServiceImpl implements ProjectService{
     private final ProjectReader projectReader;
     private final ProjectStore projectStore;
     private final UserReader userReader;
-    private final ProjectSeriesFactory projectSeriesFactory;
+    private final ProjectSeriesRegisterFactory projectSeriesRegisterFactory;
+    private final ProjectSeriesUpdateFactory projectSeriesUpdateFactory;
     private final ProjectInfoMapper projectInfoMapper;
 
     @Override
@@ -29,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService{
         // 2. save entity
         // 3. entity -> info and return
         User user = userReader.getUserWithUserToken(registerProject.getUserToken());
-        Project project = projectSeriesFactory.storeProject(user, registerProject);
+        Project project = projectSeriesRegisterFactory.storeProject(user, registerProject);
         return project.getProjectToken();
     }
 
@@ -46,13 +47,27 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public String updateProject(ProjectCommand.UpdateProject updateProject) {
+        User user = userReader.getUserWithUserToken(updateProject.getUserToken());
+        Project project = projectSeriesUpdateFactory.updateProject(user, updateProject);
+        return project.getProjectToken();
+    }
+
+    @Override
     public String registerTask(ProjectCommand.RegisterTask registerTask) {
         // 1. command -> entity
         // 2. save entity
         // 3. entity -> info and return
         Project project = projectReader.getProjectWithToken(registerTask.getProjectToken());
-        Task initTask = projectSeriesFactory.storeTask(project, registerTask);
+        Task initTask = projectSeriesRegisterFactory.storeTask(project, registerTask);
         return initTask.getTaskToken();
+    }
+
+    @Override
+    public String updateTask(ProjectCommand.UpdateTask updateTask) {
+        Project project = projectReader.getProjectWithToken(updateTask.getProjectToken());
+        Task task = projectSeriesUpdateFactory.updateTask(project, updateTask);
+        return task.getTaskToken();
     }
 
     @Override
@@ -61,7 +76,7 @@ public class ProjectServiceImpl implements ProjectService{
         // 2. save entity
         // 3. entity -> info and return
         Task task = projectReader.getTaskWithToken(registerAction.getTaskToken());
-        Action initAction = projectSeriesFactory.storeAction(task, registerAction);
+        Action initAction = projectSeriesRegisterFactory.storeAction(task, registerAction);
         return initAction.getActionToken();
     }
 

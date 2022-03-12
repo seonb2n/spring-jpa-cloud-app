@@ -6,9 +6,7 @@ import com.example.demo.domain.project.task.Task;
 import com.example.demo.domain.project.task.action.Action;
 import com.example.demo.domain.user.User;
 
-import java.util.List;
-
-public interface ProjectSeriesFactory {
+public interface ProjectSeriesRegisterFactory {
 
     Project storeProject(User user, ProjectCommand.RegisterProject registerProject);
 

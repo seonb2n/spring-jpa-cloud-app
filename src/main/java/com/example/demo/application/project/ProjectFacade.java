@@ -18,8 +18,16 @@ public class ProjectFacade {
         return projectService.registerProject(registerProject);
     }
 
+    public String updateProject(ProjectCommand.UpdateProject updateProject) {
+        return projectService.updateProject(updateProject);
+    }
+
     public String registerTask(ProjectCommand.RegisterTask registerTask) {
          return projectService.registerTask(registerTask);
+    }
+
+    public String updateTask(ProjectCommand.UpdateTask updateTask) {
+        return projectService.updateTask(updateTask);
     }
 
     public String registerAction(ProjectCommand.RegisterAction registerAction) {
