@@ -46,12 +46,14 @@ Content-Type: application/json
   "importance" : "HIGH",
   "startDayTime" : "22-10-09-10:00",
   "endDayTime" : "22-10-09-14:00",
-  "projectToken" : "project_xyrdV4CJ9LP6",
+  "projectToken" : "project_KuntBLM0IBGT",
   "registerActionList" : [
     {
+      "taskToken" : "",
       "content" : "test-action1"
     },
     {
+      "taskToken" : "",
       "content" : "test-action2"
     }
       ]
@@ -63,7 +65,7 @@ POST http://localhost:8080/api/v1/projects/register/action
 Content-Type: application/json
 
 {
-  "taskToken" : "task_Qh9BMDLQsYt3TdU",
+  "taskToken" : "task_m3x5bD5MwL92q6L",
   "content" : "test-action"
 }
 
@@ -73,5 +75,6 @@ POST http://localhost:8080/api/v1/projects/retrieve/project
 Content-Type: application/json
 
 {
-  "projectToken": "project_8tCHml97ROSJ"
+  "projectToken": "project_KuntBLM0IBGT"
 }
+

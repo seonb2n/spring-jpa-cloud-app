@@ -14,9 +14,8 @@ public interface ProjectService {
 
     String registerTask(ProjectCommand.RegisterTask registerTask);
 
+    String updateTask(ProjectCommand.UpdateTask updateTask);
+
     String registerAction(ProjectCommand.RegisterAction registerAction);
 
-    ProjectInfo.Main retrieveProject(String projectToken);
-
-    String updateTask(ProjectCommand.UpdateTask updateTask);
-}
+    ProjectInfo.Main retrieveProject(String projectToken);}

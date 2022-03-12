@@ -3,7 +3,7 @@ package com.example.demo.infrastructure.project;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.ProjectCommand;
 import com.example.demo.domain.project.service.ProjectReader;
-import com.example.demo.domain.project.service.ProjectSeriesFactory;
+import com.example.demo.domain.project.service.ProjectSeriesRegisterFactory;
 import com.example.demo.domain.project.service.ProjectStore;
 import com.example.demo.domain.project.task.Task;
 import com.example.demo.domain.project.task.action.Action;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ProjectSeriesFactoryImpl implements ProjectSeriesFactory {
+public class ProjectSeriesRegisterFactoryImpl implements ProjectSeriesRegisterFactory {
     private final ProjectReader projectReader;
     private final ProjectStore projectStore;
 
