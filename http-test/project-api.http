@@ -37,10 +37,30 @@ Content-Type: application/json
   ]
 }
 
+### 프로젝트에 소속되지 않은 태스크 및 액션 등록
+POST http://localhost:8080/api/v1/projects/register/task
+Content-Type: application/json
+
+{
+  "taskName": "test--task-noneProject",
+  "importance" : "HIGH",
+  "startDayTime" : "22-10-09-10:00",
+  "endDayTime" : "22-10-09-14:00",
+  "projectToken" : "project_8tCHml97ROSJ",
+  "registerActionList" : [
+    {
+      "content" : "test-action1"
+    },
+    {
+      "content" : "test-action2"
+    }
+      ]
+}
+
 ### 프로젝트 토큰으로 검색
 POST http://localhost:8080/api/v1/projects/retrieve/project
 Content-Type: application/json
 
 {
-  "projectToken": "project_8OU2ujIhlD1S"
+  "projectToken": "project_8tCHml97ROSJ"
 }

@@ -42,6 +42,7 @@ public class UserDto {
         private final String startDayTime;
         private final String endDayTime;
         private final User.UserStatus status;
+        private final List<Project> projectTokenList;
 
         public RegisterResponse(UserInfo.Main userInfo) {
             this.userToken = userInfo.getUserToken();
@@ -51,6 +52,7 @@ public class UserDto {
             this.startDayTime = userInfo.getStartDayTime();
             this.endDayTime = userInfo.getEndDayTime();
             this.status = userInfo.getStatus();
+            this.projectTokenList = userInfo.getProjectList();
         }
     }
 

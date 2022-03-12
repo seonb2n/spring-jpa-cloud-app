@@ -6,6 +6,7 @@ import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.postIt.category.service.CategoryStore;
 import com.example.demo.domain.postIt.service.PostItStore;
 import com.example.demo.domain.user.User;
+import com.example.demo.domain.user.UserCommand;
 import com.example.demo.domain.user.service.UserReader;
 import com.example.demo.domain.user.service.UserService;
 import com.example.demo.domain.user.service.UserStore;
@@ -35,48 +36,17 @@ public class DBInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User defaultUser = User.builder()
-                .userEmail("abc123@naver.com")
+        UserCommand.RegisterUser registerUser = UserCommand.RegisterUser.builder()
+                .userEmail("test-user@naver.com")
+                .userNickName("test-user")
+                .startDayTime("20-03-01 09:00")
+                .endDayTime("22-06-30 15:00")
                 .password("1234")
-                .userNickName("test-steve")
-                .startDayTime("09:00")
-                .endDayTime("16:00")
                 .build();
+        userFacade.registerUser(registerUser);
 
-        defaultUser.changeUserToken("user_1234");
-        userStore.store(defaultUser);
-        log.info(defaultUser.getUserToken());
-
-        User user = userReader.getUserWithUserEmail("abc123@naver.com");
-        String userToken = user.getUserToken();
-
-        Category testCategory = Category.builder()
-                .categoryName("test-category")
-                .build();
-
-        categoryRepository.save(testCategory);
-
-        PostIt postIt1 = PostIt.builder()
-                .user(user)
-                .userToken(userToken)
-                .content("test-postIt1")
-                .status("INCOMPLETE")
-                .category(testCategory)
-                .build();
-
-        PostIt postIt2 = PostIt.builder()
-                .user(user)
-                .userToken(userToken)
-                .content("test-postIt2")
-                .status("INCOMPLETE")
-                .category(testCategory)
-                .build();
-
-
-        List<PostIt> postItList = new ArrayList<>();
-        postItList.add(postIt1);
-        postItList.add(postIt2);
-
-        postItStore.storeAll(postItList);
+        User user = userReader.getUserWithUserEmail("test-user@naver.com");
+        user.changeUserToken("user_1234");
+        userStore.store(user);
     }
 }
