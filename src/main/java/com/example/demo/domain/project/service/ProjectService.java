@@ -5,11 +5,11 @@ import com.example.demo.domain.project.ProjectInfo;
 
 public interface ProjectService {
 
-    ProjectInfo.Main registerProject(ProjectCommand.RegisterProject registerProject);
+    String registerProject(ProjectCommand.RegisterProject registerProject);
 
-    ProjectInfo.TaskInfo registerTask(ProjectCommand.RegisterTask registerTask);
+    String registerTask(ProjectCommand.RegisterTask registerTask);
 
-    ProjectInfo.ActionInfo registerAction(ProjectCommand.RegisterAction registerAction);
+    String registerAction(ProjectCommand.RegisterAction registerAction);
 
     ProjectInfo.Main retrieveProject(String projectToken);
 }

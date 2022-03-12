@@ -27,25 +27,22 @@ public class ProjectApiController {
         // 3. 결과로 나온 projectInfo -> registerResponse
         // 4. CommonResponse 로 감싸서 return
         var registerCommand = projectDtoMapper.of(registerProjectRequest);
-        var registerInfo = projectFacade.registerProject(registerCommand);
-        var registerResponse = projectDtoMapper.of(registerInfo);
-        return CommonResponse.success(registerResponse);
+        var registerToken = projectFacade.registerProject(registerCommand);
+        return CommonResponse.success(registerToken);
     }
 
     @PostMapping("/register/task")
     public CommonResponse registerTask(@RequestBody ProjectDto.RegisterTaskRequest registerTaskRequest) {
         var registerCommand = projectDtoMapper.of(registerTaskRequest);
-        var registerInfo = projectFacade.registerTask(registerCommand);
-        var registerResponse = projectDtoMapper.of(registerInfo);
-        return CommonResponse.success(registerResponse);
+        var registerToken = projectFacade.registerTask(registerCommand);
+        return CommonResponse.success(registerToken);
     }
 
     @PostMapping("/register/action")
     public CommonResponse registerAction(@RequestBody ProjectDto.RegisterActionRequest registerActionRequest) {
         var registerCommand = projectDtoMapper.of(registerActionRequest);
-        var registerInfo = projectFacade.registerAction(registerCommand);
-        var registerResponse = projectDtoMapper.of(registerInfo);
-        return CommonResponse.success(registerResponse);
+        var registerToken = projectFacade.registerAction(registerCommand);
+        return CommonResponse.success(registerToken);
     }
 
     @PostMapping("/retrieve/project")

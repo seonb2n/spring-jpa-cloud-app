@@ -24,33 +24,33 @@ public class ProjectServiceImpl implements ProjectService{
     private final ProjectInfoMapper projectInfoMapper;
 
     @Override
-    public ProjectInfo.Main registerProject(ProjectCommand.RegisterProject registerProject) {
+    public String registerProject(ProjectCommand.RegisterProject registerProject) {
         // 1. command -> entity
         // 2. save entity
         // 3. entity -> info and return
         User user = userReader.getUserWithUserToken(registerProject.getUserToken());
         Project project = projectSeriesFactory.storeProject(user, registerProject);
-        return projectInfoMapper.of(project, project.getTaskList());
+        return project.getProjectToken();
     }
 
     @Override
-    public ProjectInfo.TaskInfo registerTask(ProjectCommand.RegisterTask registerTask) {
+    public String registerTask(ProjectCommand.RegisterTask registerTask) {
         // 1. command -> entity
         // 2. save entity
         // 3. entity -> info and return
         Project project = projectReader.getProjectWithToken(registerTask.getProjectToken());
         Task initTask = projectSeriesFactory.storeTask(project, registerTask);
-        return projectInfoMapper.of(initTask);
+        return initTask.getTaskToken();
     }
 
     @Override
-    public ProjectInfo.ActionInfo registerAction(ProjectCommand.RegisterAction registerAction) {
+    public String registerAction(ProjectCommand.RegisterAction registerAction) {
         // 1. command -> entity
         // 2. save entity
         // 3. entity -> info and return
         Task task = projectReader.getTaskWithToken(registerAction.getTaskToken());
         Action initAction = projectSeriesFactory.storeAction(task, registerAction);
-        return projectInfoMapper.of(initAction);
+        return initAction.getActionToken();
     }
 
     @Override

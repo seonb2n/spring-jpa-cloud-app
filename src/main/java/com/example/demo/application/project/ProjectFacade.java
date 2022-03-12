@@ -14,15 +14,15 @@ public class ProjectFacade {
 
     private final ProjectService projectService;
 
-    public ProjectInfo.Main registerProject(ProjectCommand.RegisterProject registerProject) {
+    public String registerProject(ProjectCommand.RegisterProject registerProject) {
         return projectService.registerProject(registerProject);
     }
 
-    public ProjectInfo.TaskInfo registerTask(ProjectCommand.RegisterTask registerTask) {
+    public String registerTask(ProjectCommand.RegisterTask registerTask) {
          return projectService.registerTask(registerTask);
     }
 
-    public ProjectInfo.ActionInfo registerAction(ProjectCommand.RegisterAction registerAction) {
+    public String registerAction(ProjectCommand.RegisterAction registerAction) {
         return projectService.registerAction(registerAction);
     }
 
