@@ -55,6 +55,27 @@ public class ProjectDto {
     @Getter
     @Setter
     @ToString
+    public static class UpdateTaskRequest {
+        private String taskToken;
+
+        @NotNull(message = "Task 이름은 필수값입니다.")
+        private String taskName;
+
+        private String importance;
+
+        private String startDayTime;
+
+        private String endDayTime;
+
+        private String projectToken;
+
+        private List<RegisterActionRequest> registerActionList;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
     public static class RegisterActionRequest {
 
         private String taskToken;

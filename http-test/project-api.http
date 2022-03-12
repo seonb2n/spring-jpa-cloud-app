@@ -46,7 +46,7 @@ Content-Type: application/json
   "importance" : "HIGH",
   "startDayTime" : "22-10-09-10:00",
   "endDayTime" : "22-10-09-14:00",
-  "projectToken" : "project_8tCHml97ROSJ",
+  "projectToken" : "project_xyrdV4CJ9LP6",
   "registerActionList" : [
     {
       "content" : "test-action1"
@@ -56,6 +56,17 @@ Content-Type: application/json
     }
       ]
 }
+
+
+### 태스크에 새로운 액션 추가
+POST http://localhost:8080/api/v1/projects/register/action
+Content-Type: application/json
+
+{
+  "taskToken" : "task_Qh9BMDLQsYt3TdU",
+  "content" : "test-action"
+}
+
 
 ### 프로젝트 토큰으로 검색
 POST http://localhost:8080/api/v1/projects/retrieve/project

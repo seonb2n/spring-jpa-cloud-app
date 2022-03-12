@@ -24,4 +24,6 @@ public interface ProjectDtoMapper {
     ProjectDto.Task of(ProjectInfo.TaskInfo taskInfo);
 
     ProjectDto.Action of(ProjectInfo.ActionInfo actionInfo);
+
+    ProjectCommand.UpdateTask of(ProjectDto.UpdateTaskRequest updateTaskRequest);
 }

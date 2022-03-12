@@ -3,6 +3,7 @@ package com.example.demo.domain.project.task;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.project.Project;
+import com.example.demo.domain.project.ProjectCommand;
 import com.example.demo.domain.project.task.action.Action;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

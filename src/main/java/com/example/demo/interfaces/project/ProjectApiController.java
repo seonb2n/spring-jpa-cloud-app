@@ -38,6 +38,12 @@ public class ProjectApiController {
         return CommonResponse.success(registerToken);
     }
 
+    @PostMapping("/update/task")
+    public CommonResponse updateTask(@RequestBody ProjectDto.UpdateTaskRequest updateTaskRequest) {
+        var updateCommand = projectDtoMapper.of(updateTaskRequest);
+
+    }
+
     @PostMapping("/register/action")
     public CommonResponse registerAction(@RequestBody ProjectDto.RegisterActionRequest registerActionRequest) {
         var registerCommand = projectDtoMapper.of(registerActionRequest);

@@ -15,4 +15,8 @@ public interface ProjectSeriesFactory {
     Task storeTask(Project project, ProjectCommand.RegisterTask registerTask);
 
     Action storeAction(Task task, ProjectCommand.RegisterAction registerAction);
+
+    Project updateProject(User user, ProjectCommand.UpdateProject updateProject);
+
+    Task updateTask(Project project, ProjectCommand.UpdateTask updateTask);
 }

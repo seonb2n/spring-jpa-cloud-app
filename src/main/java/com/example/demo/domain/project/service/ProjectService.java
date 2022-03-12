@@ -10,9 +10,13 @@ public interface ProjectService {
 
     String registerNoneProject(String userToken);
 
+    String updateProject(ProjectCommand.UpdateProject updateProject);
+
     String registerTask(ProjectCommand.RegisterTask registerTask);
 
     String registerAction(ProjectCommand.RegisterAction registerAction);
 
     ProjectInfo.Main retrieveProject(String projectToken);
+
+    String updateTask(ProjectCommand.UpdateTask updateTask);
 }

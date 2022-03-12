@@ -22,6 +22,11 @@ public class ProjectFacade {
          return projectService.registerTask(registerTask);
     }
 
+    public String updateTask(ProjectCommand.UpdateTask updateTask) {
+        return projectService.updateTask(updateTask);
+
+    }
+
     public String registerAction(ProjectCommand.RegisterAction registerAction) {
         return projectService.registerAction(registerAction);
     }

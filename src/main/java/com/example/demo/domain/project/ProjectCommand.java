@@ -5,6 +5,7 @@ import com.example.demo.domain.project.task.action.Action;
 import com.example.demo.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import java.util.List;
 
@@ -103,5 +104,38 @@ public class ProjectCommand {
                     .build();
         }
 
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateProject {
+        private String userToken;
+        private String projectToken;
+        private String projectName;
+        private String endDayTime;
+        private List<RegisterTask> registerTaskList;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateTask {
+        private String taskToken;
+        private String taskName;
+        private String importance;
+        private String startDayTime;
+        private String endDayTime;
+        private String projectToken;
+        private List<RegisterAction> registerActionList;
+
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdateAction {
+        private String actionToken;
+        private String content;
     }
 }

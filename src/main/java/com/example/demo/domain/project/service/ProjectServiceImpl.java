@@ -46,6 +46,11 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public String updateProject(ProjectCommand.UpdateProject updateProject) {
+        return null;
+    }
+
+    @Override
     public String registerTask(ProjectCommand.RegisterTask registerTask) {
         // 1. command -> entity
         // 2. save entity
@@ -53,6 +58,12 @@ public class ProjectServiceImpl implements ProjectService{
         Project project = projectReader.getProjectWithToken(registerTask.getProjectToken());
         Task initTask = projectSeriesFactory.storeTask(project, registerTask);
         return initTask.getTaskToken();
+    }
+
+    @Override
+    public String updateTask(ProjectCommand.UpdateTask updateTask) {
+        Task initTask = projectReader.getTaskWithToken(updateTask.getTaskToken());
+        return null;
     }
 
     @Override
