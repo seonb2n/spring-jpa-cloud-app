@@ -28,10 +28,10 @@ public class ProjectSeriesUpdateFactoryImpl implements ProjectSeriesUpdateFactor
                 projectStore.store(initTask);
             }
             else {
-                Task task = projectReader.getTaskWithToken(updateTask.getTaskToken());
-                task.updateTask(project, updateTask);
+                updateTask(project, updateTask);
             }
         });
+        projectStore.store(project);
         return project;
     }
 
@@ -41,15 +41,17 @@ public class ProjectSeriesUpdateFactoryImpl implements ProjectSeriesUpdateFactor
         task.updateTask(project, updateTask);
         //task 의 action 의 변경 내용에 대해서 update 가 필요하다.
         updateTask.getUpdateActionList().forEach(updateAction -> {
-            if(updateAction.getActionToken() == null) {
+            if(updateAction.getActionToken() == null || updateAction.getActionToken().equals("")) {
                 Action initAction = updateAction.toEntity(task);
                 projectStore.store(initAction);
             }
             else {
                 Action action = projectReader.getActionWithToken(updateAction.getActionToken());
                 action.updateAction(updateAction);
+                projectStore.store(action);
             }
         });
+        projectStore.store(task);
         return task;
     }
 }

@@ -46,7 +46,7 @@ Content-Type: application/json
   "importance" : "HIGH",
   "startDayTime" : "22-10-09-10:00",
   "endDayTime" : "22-10-09-14:00",
-  "projectToken" : "project_KuntBLM0IBGT",
+  "projectToken" : "project_1234",
   "registerActionList" : [
     {
       "taskToken" : "",
@@ -69,12 +69,58 @@ Content-Type: application/json
   "content" : "test-action"
 }
 
+### 프로젝트 업데이트 테스트
+POST http://localhost:8080/api/v1/projects/update/project
+Content-Type: application/json
+
+{
+  "userToken" : "user_1234",
+  "projectToken" : "project_1234",
+  "projectName" : "project-update test",
+  "endDayTime" : null,
+  "updateTaskList" : []
+}
+
+### 프로젝트와 태스크 업데이트 태스트
+POST http://localhost:8080/api/v1/projects/update/project
+Content-Type: application/json
+
+{
+  "userToken": "user_1234",
+  "projectToken": "project_1234",
+  "projectName": "project-update test",
+  "endDayTime": null,
+  "updateTaskList": [
+    {
+      "taskToken": "task_TovQ1FCOQ8IVhIw",
+      "taskName": "test-task-update",
+      "importance": "MIDDLE",
+      "startDayTime": "22-10-09-10:00",
+      "endDayTime": "22-10-09-14:00",
+      "projectToken": "project_1234",
+      "updateActionList": [
+        {
+          "taskToken": "task_TovQ1FCOQ8IVhIw",
+          "actionToken": "action_gb57IITqWFt8a",
+          "content": "test-action1-update",
+          "actionStatus": "DONE"
+        },
+        {
+          "taskToken" : "task_45TyPZgaZUdYdMU",
+          "actionToken" : "",
+          "content" : "new-action-update",
+          "actionStatus" : "UNDONE"
+        }
+      ]
+    }
+  ]
+}
 
 ### 프로젝트 토큰으로 검색
 POST http://localhost:8080/api/v1/projects/retrieve/project
 Content-Type: application/json
 
 {
-  "projectToken": "project_KuntBLM0IBGT"
+  "projectToken": "project_1234"
 }
 

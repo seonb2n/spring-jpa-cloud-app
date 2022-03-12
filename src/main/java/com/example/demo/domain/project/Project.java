@@ -57,4 +57,8 @@ public class Project extends BaseEntity {
         this.endDayTime = updateProject.getEndDayTime();
     }
 
+    public void changeProjectToken(String projectToken) {
+        this.projectToken = projectToken;
+    }
+
 }
