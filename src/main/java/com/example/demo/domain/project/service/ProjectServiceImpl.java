@@ -34,6 +34,18 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public String registerNoneProject(String userToken) {
+        User user = userReader.getUserWithUserToken(userToken);
+        Project initProject = Project.builder()
+                .projectName("none")
+                .user(user)
+                .userToken(userToken)
+                .build();
+        Project project = projectStore.store(initProject);
+        return project.getProjectToken();
+    }
+
+    @Override
     public String registerTask(ProjectCommand.RegisterTask registerTask) {
         // 1. command -> entity
         // 2. save entity
