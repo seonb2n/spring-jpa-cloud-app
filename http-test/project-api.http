@@ -92,7 +92,7 @@ Content-Type: application/json
   "endDayTime": null,
   "updateTaskList": [
     {
-      "taskToken": "task_TovQ1FCOQ8IVhIw",
+      "taskToken": "",
       "taskName": "test-task-update",
       "importance": "MIDDLE",
       "startDayTime": "22-10-09-10:00",
@@ -100,13 +100,13 @@ Content-Type: application/json
       "projectToken": "project_1234",
       "updateActionList": [
         {
-          "taskToken": "task_TovQ1FCOQ8IVhIw",
+          "taskToken": "",
           "actionToken": "action_gb57IITqWFt8a",
           "content": "test-action1-update",
           "actionStatus": "DONE"
         },
         {
-          "taskToken" : "task_45TyPZgaZUdYdMU",
+          "taskToken" : "",
           "actionToken" : "",
           "content" : "new-action-update",
           "actionStatus" : "UNDONE"

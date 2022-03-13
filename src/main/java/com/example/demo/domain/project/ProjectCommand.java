@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProjectCommand {
 
@@ -95,7 +96,6 @@ public class ProjectCommand {
 
             return initAction;
         }
-
     }
 
     @Getter
@@ -107,6 +107,7 @@ public class ProjectCommand {
         private String projectName;
         private String endDayTime;
         private List<UpdateTask> updateTaskList;
+
     }
 
     @Getter
@@ -131,6 +132,19 @@ public class ProjectCommand {
                     .endDayTime(endDayTime)
                     .build();
         }
+
+        public RegisterTask toRegisterTask(Project project) {
+            return RegisterTask.builder()
+                    .taskName(taskName)
+                    .projectToken(project.getProjectToken())
+                    .importance(importance)
+                    .startDayTime(startDayTime)
+                    .endDayTime(endDayTime)
+                    .registerActionList(updateActionList.stream()
+                            .map(UpdateAction::toRegisterAction).collect(Collectors.toList()))
+                    .build();
+
+        }
     }
 
     @Getter
@@ -148,6 +162,12 @@ public class ProjectCommand {
                     .taskToken(taskToken)
                     .content(content)
                     .actionStatus(actionStatus)
+                    .build();
+        }
+
+        public RegisterAction toRegisterAction() {
+            return RegisterAction.builder()
+                    .content(content)
                     .build();
         }
     }
