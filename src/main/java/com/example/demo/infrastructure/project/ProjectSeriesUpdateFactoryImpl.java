@@ -3,6 +3,7 @@ package com.example.demo.infrastructure.project;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.ProjectCommand;
 import com.example.demo.domain.project.service.ProjectReader;
+import com.example.demo.domain.project.service.ProjectSeriesRegisterFactory;
 import com.example.demo.domain.project.service.ProjectSeriesUpdateFactory;
 import com.example.demo.domain.project.service.ProjectStore;
 import com.example.demo.domain.project.task.Task;
@@ -17,15 +18,16 @@ import org.springframework.stereotype.Component;
 public class ProjectSeriesUpdateFactoryImpl implements ProjectSeriesUpdateFactory {
     private final ProjectStore projectStore;
     private final ProjectReader projectReader;
+    private final ProjectSeriesRegisterFactory projectSeriesRegisterFactory;
 
     @Override
     public Project updateProject(User user, ProjectCommand.UpdateProject updateProject) {
         Project project = projectReader.getProjectWithToken(updateProject.getProjectToken());
         project.updateProject(updateProject);
         updateProject.getUpdateTaskList().forEach(updateTask -> {
-            if(updateTask.getTaskToken() == null) {
-                Task initTask = updateTask.toEntity(project);
-                projectStore.store(initTask);
+            if(updateTask.getTaskToken() == null || updateTask.getTaskToken().equals("")) {
+                ProjectCommand.RegisterTask registerTask = updateTask.toRegisterTask(project);
+                projectSeriesRegisterFactory.storeTask(project, registerTask);
             }
             else {
                 updateTask(project, updateTask);
@@ -42,8 +44,7 @@ public class ProjectSeriesUpdateFactoryImpl implements ProjectSeriesUpdateFactor
         //task 의 action 의 변경 내용에 대해서 update 가 필요하다.
         updateTask.getUpdateActionList().forEach(updateAction -> {
             if(updateAction.getActionToken() == null || updateAction.getActionToken().equals("")) {
-                Action initAction = updateAction.toEntity(task);
-                projectStore.store(initAction);
+                projectSeriesRegisterFactory.storeAction(task, updateAction.toRegisterAction());
             }
             else {
                 Action action = projectReader.getActionWithToken(updateAction.getActionToken());
