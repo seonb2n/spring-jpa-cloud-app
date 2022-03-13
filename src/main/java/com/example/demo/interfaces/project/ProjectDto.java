@@ -84,6 +84,8 @@ public class ProjectDto {
     @Setter
     @ToString
     public static class UpdateTaskRequest {
+        private String projectToken;
+
         private String taskToken;
 
         @NotNull(message = "Task 이름은 필수값입니다.")
@@ -94,8 +96,6 @@ public class ProjectDto {
         private String startDayTime;
 
         private String endDayTime;
-
-        private String projectToken;
 
         private List<UpdateActionRequest> updateActionList;
 

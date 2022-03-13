@@ -1,6 +1,7 @@
 package com.example.demo.interfaces.user;
 
 import com.example.demo.domain.postIt.PostIt;
+import com.example.demo.domain.postIt.category.Category;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserInfo;
@@ -77,6 +78,7 @@ public class UserDto {
         private final String endDayTime;
         private final User.UserStatus status;
         private final List<PostIt> postItList;
+        private final List<Category> categoryList;
         private final List<Project> projectList;
 
         public GetWithTokenResponse(UserInfo.Main userInfo) {
@@ -88,6 +90,7 @@ public class UserDto {
             this.endDayTime = userInfo.getEndDayTime();
             this.status = userInfo.getStatus();
             this.postItList = userInfo.getPostItList();
+            this.categoryList = userInfo.getCategoryList();
             this.projectList = userInfo.getProjectList();
         }
     }

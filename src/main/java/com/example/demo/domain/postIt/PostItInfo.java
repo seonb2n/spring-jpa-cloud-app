@@ -25,6 +25,7 @@ public class PostItInfo {
         private final PostIt.PostItStatus status;
         private final Category category;
         private final String categoryName;
+        private final String categoryToken;
 
         public Main(PostIt postIt) {
             this.postItId = postIt.getId();
@@ -33,7 +34,8 @@ public class PostItInfo {
             this.content = postIt.getContent();
             this.status = postIt.getStatus();
             this.category = postIt.getCategory();
-            this.categoryName = postIt.getCategoryName();
+            this.categoryName = category.getCategoryName();
+            this.categoryToken = category.getCategoryToken();
         }
     }
 

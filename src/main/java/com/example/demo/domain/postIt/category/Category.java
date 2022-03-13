@@ -3,6 +3,7 @@ package com.example.demo.domain.postIt.category;
 import com.example.demo.common.util.TokenGenerator;
 import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.postIt.PostIt;
+import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -29,24 +30,27 @@ public class Category extends BaseEntity {
     @Column(name = "category_id", nullable = false)
     private Long id;
     private String categoryToken;
-
     private String categoryName;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String userToken;
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.PERSIST)
     private List<PostIt> postItList = new ArrayList<>();
 
     @Builder
-    public Category(String categoryName, PostIt postIt) {
-
+    public Category(User user, String categoryName) {
         this.categoryToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_CATEGORY);
+        this.user = user;
+        this.userToken = user.getUserToken();
         this.categoryName = categoryName;
-        postItList.add(postIt);
-
     }
 
-    public Category(String categoryName) {
-        this.categoryToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_CATEGORY);
+    public void updateCategory(String categoryName) {
         this.categoryName = categoryName;
     }
 }

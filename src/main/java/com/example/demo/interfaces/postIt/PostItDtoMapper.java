@@ -12,4 +12,7 @@ public interface PostItDtoMapper {
 
     PostItCommand.RegisterPostIt of(PostItDto.RegisterRequest registerRequest);
 
+    PostItCommand.UpdatePostItUnit of(PostItDto.UpdatePostItRequestUnit updatePostItRequestUnit);
+
+    PostItCommand.UpdatePostIt of(PostItDto.UpdatePostItRequest updatePostItRequest);
 }

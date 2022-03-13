@@ -35,9 +35,10 @@ public class PostIt extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    private String categoryName;
-
+    private String categoryToken;
     private String content;
+
+    @Enumerated(EnumType.STRING)
     private PostItStatus status;
 
     @Getter
@@ -57,12 +58,34 @@ public class PostIt extends BaseEntity {
         this.userToken = userToken;
         this.content = content;
         this.category = category;
-        if(categoryName == null) {
-            this.categoryName = category.getCategoryName();
-        } else {
-            this.categoryName = categoryName;
-        }
+        this.categoryToken = category.getCategoryToken();
         changePostItStatus(status);
+    }
+
+    public void updatePostIt(Category category, PostItCommand.UpdatePostItUnit updatePostItUnit) {
+        changeCategory(category);
+        changePostItContent(updatePostItUnit.getContent());
+        changePostItStatus(updatePostItUnit.getStatus());
+    }
+
+    public void changePostItContent(String content) {
+        if(content.equals(this.content)) {
+            return;
+
+        }
+        else {
+            this.content = content;
+        }
+    }
+
+    public void changeCategory(Category category) {
+        if(category.getCategoryToken().equals(this.categoryToken)) {
+            return;
+        }
+        else {
+            this.category = category;
+            this.categoryToken = category.getCategoryToken();
+        }
     }
 
     public void changePostItStatus(String status) {

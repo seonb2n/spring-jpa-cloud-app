@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  PostIt data input 을 처리하는 command
  **/
@@ -40,8 +42,35 @@ public class PostItCommand {
                     .categoryName(categoryName)
                     .build();
         }
-
     }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdatePostIt {
+        private String userToken;
+        private List<UpdatePostItUnit> updatePostItUnitList;
+    }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class UpdatePostItUnit {
+        private String content;
+        private String status;
+        private String categoryName;
+        private String categoryToken;
+        private String postItToken;
+
+        public PostIt toEntity(User user, Category category) {
+            return PostIt.builder()
+                    .user(user)
+                    .userToken(user.getUserToken())
+                    .content(content)
+                    .status(status)
+                    .category(category)
+                    .categoryName(categoryName)
+                    .build();
+        }
+    }
 }

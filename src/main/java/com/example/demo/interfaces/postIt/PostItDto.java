@@ -21,7 +21,6 @@ public class PostItDto {
     @ToString
     public static class RegisterRequest {
 
-        //TODO userToken 에 대한 검증 필요
         private String userToken;
 
         @NotEmpty(message = "내용이 비어 있으면 안됩니다.")
@@ -72,6 +71,28 @@ public class PostItDto {
             postItList.getPostItInfoList().forEach(postItInfo -> registerResponses.add(new RegisterResponse(postItInfo)));
         }
 
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class UpdatePostItRequest {
+
+        private String userToken;
+        private List<UpdatePostItRequestUnit> updatePostItUnitList;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class UpdatePostItRequestUnit {
+        @NotEmpty(message = "내용이 비어 있으면 안됩니다.")
+        private String content;
+        private String status;
+        private String categoryName;
+        private String categoryToken;
+        private String postItToken;
     }
 
 }

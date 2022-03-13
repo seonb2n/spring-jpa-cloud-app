@@ -16,13 +16,7 @@ public class PostItFacade {
 
     private final PostItService postItService;
 
-    public PostItInfo.Main registerPostIt(PostItCommand.RegisterPostIt registerPostIt) {
-        var postItInfo = postItService.registerPostIt(registerPostIt);
-        return postItInfo;
-    }
-
-    public PostItInfo.PostItList registerAllPostIt(List<PostItCommand.RegisterPostIt> registerPostItList) {
-        var postItInfoList = postItService.saveAllPostIt(registerPostItList);
-        return postItInfoList;
+    public String updateAllPostIt(PostItCommand.UpdatePostIt postItUpdateCommand) {
+        return postItService.updateAllPostIt(postItUpdateCommand);
     }
 }

@@ -88,7 +88,7 @@ Content-Type: application/json
 {
   "userToken": "user_1234",
   "projectToken": "project_1234",
-  "projectName": "project-update test",
+  "projectName": "project-update test2",
   "endDayTime": null,
   "updateTaskList": [
     {
@@ -112,6 +112,39 @@ Content-Type: application/json
           "actionStatus" : "UNDONE"
         }
       ]
+    }
+  ]
+}
+
+### 태스크 업데이트 태스트
+POST http://localhost:8080/api/v1/projects/update/task
+Content-Type: application/json
+
+{
+  "taskToken" : "task_WI3PF1nxRadVf2n",
+  "projectToken" : "project_1234",
+  "taskName": "test--task-update-new-name",
+  "importance" : "HIGH",
+  "startDayTime" : "22-10-09-10:00",
+  "endDayTime" : "22-10-09-14:00",
+  "updateActionList" : [
+    {
+      "taskToken" : "task_WI3PF1nxRadVf2n",
+      "actionToken" : "action_207K0LZDVc3f0",
+      "content" : "test-action1-update",
+      "actionStatus" : "DONE"
+    },
+    {
+      "taskToken" : "task_WI3PF1nxRadVf2n",
+      "actionToken" : "action_riqwzTMXzfLr2",
+      "content" : "test-action2-update",
+      "actionStatus" : "DONE"
+    },
+    {
+      "taskToken" : "task_WI3PF1nxRadVf2n",
+      "actionToken" : "",
+      "content" : "test-action3-update",
+      "actionStatus" : "UNDONE"
     }
   ]
 }

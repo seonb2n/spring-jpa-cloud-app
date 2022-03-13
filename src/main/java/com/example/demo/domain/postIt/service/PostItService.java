@@ -7,9 +7,6 @@ import java.util.List;
 
 public interface PostItService {
 
-    PostItInfo.Main registerPostIt(PostItCommand.RegisterPostIt registerPostIt);
+    String updateAllPostIt(PostItCommand.UpdatePostIt updatePostIt);
 
-    PostItInfo.Main changePostItStatus(PostItCommand.ChangePostItStatus changePostIt);
-
-    PostItInfo.PostItList saveAllPostIt(List<PostItCommand.RegisterPostIt> registerPostItList);
 }
