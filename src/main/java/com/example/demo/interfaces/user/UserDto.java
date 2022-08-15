@@ -95,4 +95,33 @@ public class UserDto {
         }
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class LoginRequest {
+
+        @NotEmpty(message = "user Email 는 필수값입니다")
+        private String userEmail;
+        @NotEmpty(message = "password 는 필수값입니다")
+        private String password;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class LoginResponse {
+        private final String userToken;
+        private final String userEmail;
+        private final String password;
+        private final String userNickName;
+
+
+        public LoginResponse(UserInfo.Main userInfo) {
+            this.userToken = userInfo.getUserToken();
+            this.userEmail = userInfo.getUserEmail();
+            this.password = userInfo.getPassword();
+            this.userNickName = userInfo.getUserNickName();
+
+        }
+    }
 }

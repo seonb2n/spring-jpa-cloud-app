@@ -7,4 +7,6 @@ public interface UserService {
     UserInfo.Main registerUser(UserCommand.RegisterUser registerUserCommand);
 
     UserInfo.Main getUser(String userToken);
+
+    UserInfo.Main loginUser(String userEmail, String userPassword);
 }

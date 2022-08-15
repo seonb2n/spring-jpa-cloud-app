@@ -1,6 +1,7 @@
 package com.example.demo.interfaces.user;
 
 import com.example.demo.application.user.UserFacade;
+import com.example.demo.common.exception.UserLoginFailException;
 import com.example.demo.common.response.CommonResponse;
 import com.example.demo.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,17 @@ public class UserApiController {
         var userInfo = userFacade.getUser(userToken);
         var response = new UserDto.GetWithTokenResponse(userInfo);
         return CommonResponse.success(response);
+    }
+
+    @PostMapping("/login")
+    public CommonResponse login(@RequestBody UserDto.LoginRequest loginRequest) {
+        try {
+            var response = userFacade.login(loginRequest.getUserEmail(), loginRequest.getPassword());
+            log.info("user {} 로그인!", loginRequest.getUserEmail());
+            return CommonResponse.success(new UserDto.LoginResponse(response));
+        } catch (Exception e) {
+            log.info("user {} 로그인 실패", loginRequest.getUserEmail(), e);
+            throw new UserLoginFailException();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.service;
 
+import com.example.demo.common.exception.UserLoginFailException;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserCommand;
 import com.example.demo.domain.user.UserInfo;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserStore userStore;
     private final UserReader userReader;
@@ -33,5 +34,14 @@ public class UserServiceImpl implements UserService{
     public UserInfo.Main getUser(String userToken) {
         User user = userReader.getUserWithUserToken(userToken);
         return new UserInfo.Main(user);
+    }
+
+    @Override
+    public UserInfo.Main loginUser(String userEmail, String userPassword) {
+        User user = userReader.getUserWithUserEmail(userEmail);
+        if (user.getPassword().equals(userPassword)) {
+            return new UserInfo.Main(user);
+        }
+        throw new UserLoginFailException();
     }
 }

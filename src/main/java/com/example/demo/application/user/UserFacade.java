@@ -27,4 +27,7 @@ public class UserFacade {
         return userInfo;
     }
 
+    public UserInfo.Main login(String userEmail, String password) {
+        return userService.loginUser(userEmail, password);
+    }
 }
