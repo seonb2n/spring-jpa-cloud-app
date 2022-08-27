@@ -19,7 +19,7 @@ public class CorsFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.info(">>> CorsFilter init");
-        allowOriginList.add("http://192.168.35.157:50884");
+        allowOriginList.add("http://192.168.35.157:53836");
     }
 
     @Override
