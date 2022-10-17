@@ -1,6 +1,7 @@
 package com.example.demo.domain.user.service;
 
 import com.example.demo.common.exception.UserLoginFailException;
+import com.example.demo.common.util.log.LogService;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserCommand;
 import com.example.demo.domain.user.UserInfo;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -17,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserStore userStore;
     private final UserReader userReader;
+    private final LogService logService;
 
     @Override
     @Transactional
@@ -36,11 +40,13 @@ public class UserServiceImpl implements UserService {
         return new UserInfo.Main(user);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserInfo.Main loginUser(String userEmail, String userPassword) {
-        User user = userReader.getUserWithUserEmail(userEmail);
-        if (user.getPassword().equals(userPassword)) {
-            return new UserInfo.Main(user);
+        var logInUser = userReader.getUserWithUserEmail(userEmail);
+        logService.logInTryLog(userEmail, LocalDateTime.now());
+        if (logInUser.getPassword().equals(userPassword)) {
+            return new UserInfo.Main(logInUser);
         }
         throw new UserLoginFailException();
     }

@@ -10,7 +10,7 @@ public enum ErrorCode {
     COMMON_INVALID_PARAMETER("요청한 값이 올바르지 않습니다."),
     COMMON_ENTITY_NOT_FOUND("존재하지 않는 엔티티입니다."),
     COMMON_ILLEGAL_STATUS("잘못된 상태값입니다."),
-    USER_LOGIN_FAIL("이메일 또는 비밀번호가 잘못됐습니다.");
+    USER_LOGIN_FAIL("아이디 또는 비밀번호가 틀렸습니다.");
 
     private final String errorMsg;
 
