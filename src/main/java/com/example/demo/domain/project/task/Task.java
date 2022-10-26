@@ -39,6 +39,9 @@ public class Task extends BaseEntity {
     private String startDayTime;
     private String endDayTime;
 
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
+
     @ManyToOne
     @JsonBackReference
     private Project project;
@@ -56,37 +59,34 @@ public class Task extends BaseEntity {
         private final String description;
     }
 
-    private void changeImportance(String importance) {
-        switch (importance) {
-            case "HIGH" : this.importance = Importance.HIGH;
-                            break;
-            case "MIDDLE" : this.importance = Importance.MIDDLE;
-                            break;
-            case "LOW" : this.importance = Importance.LOW;
-                            break;
-            default:
-                            break;
-        }
+    @Getter
+    @RequiredArgsConstructor
+    public enum Status {
+        DONE("완료"), FAIL("실패"), ONGOING("진행중");
+
+        private final String description;
     }
 
     @Builder
-    public Task(String taskName, String importance, String startDayTime, String endDayTime, Project project, String projectToken, List<Action> actionList) {
+    public Task(String taskName, String importance, String startDayTime, String endDayTime, Project project, String projectToken, List<Action> actionList, String status) {
         taskToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_TASK);
         this.taskName = taskName;
         this.startDayTime = startDayTime;
         this.endDayTime = endDayTime;
         this.project = project;
-        changeImportance(importance);
+        this.importance = Importance.valueOf(importance.toUpperCase());
         this.projectToken = projectToken;
         this.actionList = actionList;
+        this.status = Status.valueOf(status.toUpperCase());
     }
 
     public void updateTask(Project project, ProjectCommand.UpdateTask updateTask) {
         this.project = project;
         this.projectToken = project.getProjectToken();
         this.taskName = updateTask.getTaskName();
-        changeImportance(updateTask.getImportance());
+        this.importance = Importance.valueOf(updateTask.getImportance().toUpperCase());
         this.startDayTime = updateTask.getStartDayTime();
         this.endDayTime = updateTask.getEndDayTime();
+        this.status = Status.valueOf(updateTask.getStatus().toUpperCase());
     }
 }

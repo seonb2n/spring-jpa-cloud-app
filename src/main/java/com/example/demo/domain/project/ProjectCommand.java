@@ -54,6 +54,7 @@ public class ProjectCommand {
                         .taskName(taskName)
                         .startDayTime(startDayTime)
                         .endDayTime(endDayTime)
+                        .status("ONGOING")
                         .build();
             }
             return Task.builder()
@@ -121,6 +122,7 @@ public class ProjectCommand {
         private String endDayTime;
         private String projectToken;
         private List<UpdateAction> updateActionList;
+        private String status;
 
         public Task toEntity(Project project) {
             return Task.builder()
@@ -130,6 +132,7 @@ public class ProjectCommand {
                     .importance(importance)
                     .startDayTime(startDayTime)
                     .endDayTime(endDayTime)
+                    .status(status)
                     .build();
         }
 
