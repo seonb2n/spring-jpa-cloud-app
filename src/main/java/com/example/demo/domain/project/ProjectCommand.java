@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +41,8 @@ public class ProjectCommand {
 
         private String taskName;
         private String importance;
-        private String startDayTime;
-        private String endDayTime;
+        private LocalDateTime startDayTime;
+        private LocalDateTime endDayTime;
         private String projectToken;
         private List<RegisterAction> registerActionList;
 
@@ -118,8 +120,8 @@ public class ProjectCommand {
         private String taskToken;
         private String taskName;
         private String importance;
-        private String startDayTime;
-        private String endDayTime;
+        private LocalDateTime startDayTime;
+        private LocalDateTime endDayTime;
         private String projectToken;
         private List<UpdateAction> updateActionList;
         private String status;

@@ -8,8 +8,10 @@ import com.example.demo.domain.project.task.action.Action;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +38,8 @@ public class Task extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Importance importance;
 
-    private String startDayTime;
-    private String endDayTime;
+    private LocalDateTime startDayTime;
+    private LocalDateTime endDayTime;
 
     @Enumerated(value = EnumType.STRING)
     private Status status;
@@ -68,7 +70,7 @@ public class Task extends BaseEntity {
     }
 
     @Builder
-    public Task(String taskName, String importance, String startDayTime, String endDayTime, Project project, String projectToken, List<Action> actionList, String status) {
+    public Task(String taskName, String importance, LocalDateTime startDayTime, LocalDateTime endDayTime, Project project, String projectToken, List<Action> actionList, String status) {
         taskToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_TASK);
         this.taskName = taskName;
         this.startDayTime = startDayTime;
