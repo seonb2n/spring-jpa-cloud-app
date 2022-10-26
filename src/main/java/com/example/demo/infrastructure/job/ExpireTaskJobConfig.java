@@ -8,16 +8,17 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
-import org.springframework.batch.item.database.JpaCursorItemReader;
-import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
+import org.springframework.batch.item.database.JpaItemWriter;
+import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 /**
@@ -30,6 +31,7 @@ public class ExpireTaskJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final TaskRepository taskRepository;
+    private final EntityManagerFactory entityManagerFactory;
 
     private final static int CHUNK_SIZE = 5;
 
@@ -44,23 +46,38 @@ public class ExpireTaskJobConfig {
     public Step expireTaskStep() {
         return this.stepBuilderFactory.get("expireTaskStep")
                 .<Task, Task>chunk(CHUNK_SIZE)
-                .reader(expireTaskReader())
-//                .processor(expireTaskProcessor())
-//                .writer(expireTaskWriter())
+                .reader(expireTaskItemReader())
+                .processor(expireTaskItemProcessor())
+                .writer(expireTaskItemWriter())
                 .build();
     }
 
     @Bean
     @StepScope
-    public RepositoryItemReader<Task> expireTaskReader() {
+    public RepositoryItemReader<Task> expireTaskItemReader() {
         return new RepositoryItemReaderBuilder<Task>()
                 .name("expireTaskItemReader")
                 .repository(taskRepository)
-                .methodName("findAllByStatus")
+                .methodName("findAllByEndDayTimeBeforeAndStatus")
                 .pageSize(CHUNK_SIZE)
-                .arguments(Task.Status.ONGOING)
+                .arguments(LocalDateTime.now(), Task.Status.ONGOING)
                 .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
                 .build();
 
+    }
+
+    @Bean
+    public ItemProcessor<Task, Task> expireTaskItemProcessor() {
+        return task -> {
+            task.setStatus(Task.Status.FAIL);
+            return task;
+        };
+    }
+
+    @Bean
+    public JpaItemWriter<Task> expireTaskItemWriter() {
+        return new JpaItemWriterBuilder<Task>()
+                .entityManagerFactory(entityManagerFactory)
+                .build();
     }
 }

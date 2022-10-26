@@ -42,6 +42,7 @@ public class Task extends BaseEntity {
     private LocalDateTime endDayTime;
 
     @Enumerated(value = EnumType.STRING)
+    @Setter
     private Status status;
 
     @ManyToOne
