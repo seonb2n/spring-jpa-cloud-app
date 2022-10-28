@@ -3,6 +3,7 @@ package com.example.demo.infrastructure.job;
 import com.example.demo.domain.project.task.Task;
 import com.example.demo.infrastructure.project.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -13,8 +14,10 @@ import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityManagerFactory;
@@ -25,15 +28,20 @@ import java.util.Collections;
  *  마감 기한이 끝난 Task 의 Status를 변경한다.
  */
 @Configuration
-@RequiredArgsConstructor
 public class ExpireTaskJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final TaskRepository taskRepository;
     private final EntityManagerFactory entityManagerFactory;
-
     private final static int CHUNK_SIZE = 5;
+
+    public ExpireTaskJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, TaskRepository taskRepository, EntityManagerFactory entityManagerFactory) {
+        this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.taskRepository = taskRepository;
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     @Bean
     public Job expireTaskJob() {
@@ -58,12 +66,10 @@ public class ExpireTaskJobConfig {
         return new RepositoryItemReaderBuilder<Task>()
                 .name("expireTaskItemReader")
                 .repository(taskRepository)
-                .methodName("findAllByEndDayTimeBeforeAndStatus")
-                .pageSize(CHUNK_SIZE)
-                .arguments(LocalDateTime.now(), Task.Status.ONGOING)
-                .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
+                .methodName("findAllByEndDayTimeBefore")
+                .arguments(LocalDateTime.now())
+                .sorts(Collections.singletonMap("taskId", Sort.Direction.ASC))
                 .build();
-
     }
 
     @Bean
