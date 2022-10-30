@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 
 /**
- *  마감 기한이 끝난 Task 의 Status를 변경한다.
+ * 마감 기한이 끝난 Task 의 Status를 변경한다.
  */
 @Configuration
 public class ExpireTaskJobConfig {

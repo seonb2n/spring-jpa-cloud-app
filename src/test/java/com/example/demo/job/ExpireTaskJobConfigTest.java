@@ -1,5 +1,6 @@
 package com.example.demo.job;
 
+import com.example.demo.TestDatasourceConfig;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.task.Task;
 import com.example.demo.infrastructure.job.ExpireTaskJobConfig;
@@ -26,6 +27,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -41,7 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @EnableAutoConfiguration
 @EntityScan("com.example.demo.domain")
 @EnableJpaRepositories("com.example.demo.infrastructure.project")
-@ContextConfiguration(classes = {ExpireTaskJobConfig.class})
+@ActiveProfiles("test")
+@ContextConfiguration(classes = {ExpireTaskJobConfig.class, TestDatasourceConfig.class})
 public class ExpireTaskJobConfigTest {
 
     @Autowired
@@ -68,8 +71,10 @@ public class ExpireTaskJobConfigTest {
         //then
         assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
         assertEquals("expireTaskJob", jobInstance.getJobName());
-
     }
+
+
+
 
     public void addTaskEntities(int size) {
         Project testProject = Project.builder()

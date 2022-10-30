@@ -6,6 +6,7 @@ import com.example.demo.domain.project.ProjectInfo;
 import com.example.demo.interfaces.postIt.PostItDto;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
@@ -27,6 +28,7 @@ public interface ProjectDtoMapper {
 
     ProjectCommand.UpdateProject of(ProjectDto.UpdateProjectRequest updateProjectRequest);
 
+    @Mapping(target = "status", ignore = true)
     ProjectCommand.UpdateTask of(ProjectDto.UpdateTaskRequest updateTaskRequest);
 
     ProjectCommand.UpdateAction of(ProjectDto.UpdateActionRequest updateActionRequest);
