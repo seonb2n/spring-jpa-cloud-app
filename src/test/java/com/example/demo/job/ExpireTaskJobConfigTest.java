@@ -45,6 +45,7 @@ public class ExpireTaskJobConfigTest {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
