@@ -3,7 +3,7 @@ spring boot 활용해서 일정 관리 앱의 서버를 만든 프로젝트입�
 MySql 기반으로 작동합니다.
 
 ## 특징
-나름대로 공부한 DDD 를 적용해보고자 했습니다.
+DDD 를 적용해보고자 했습니다.
 <br>
  -> Domain, Application, Infrastructure, Interface 4가지 레이어를 분리해서 작동합니다.
  <br>
