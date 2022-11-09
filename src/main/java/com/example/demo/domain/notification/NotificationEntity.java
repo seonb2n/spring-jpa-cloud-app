@@ -17,7 +17,7 @@ public class NotificationEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationSeq;
     private Long taskId;
-    private Long userId;
+    private String projectToken;
 
     @Enumerated(EnumType.STRING)
     private NotificationEvent event;
@@ -26,9 +26,9 @@ public class NotificationEntity extends BaseEntity {
     private LocalDateTime sentAt;
 
     @Builder
-    public NotificationEntity(Long taskId, Long userId, NotificationEvent event, String text) {
+    public NotificationEntity(Long taskId, String projectToken, NotificationEvent event, String text) {
         this.taskId = taskId;
-        this.userId = userId;
+        this.projectToken = projectToken;
         this.event = event;
         this.text = text;
         this.sent = false;

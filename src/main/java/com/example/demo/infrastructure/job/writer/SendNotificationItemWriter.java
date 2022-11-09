@@ -1,8 +1,10 @@
-package com.example.demo.infrastructure.job;
+package com.example.demo.infrastructure.job.writer;
 
 import com.example.demo.domain.notification.NotificationEntity;
+import com.example.demo.domain.project.Project;
 import com.example.demo.infrastructure.notification.MessageSendService;
 import com.example.demo.infrastructure.notification.NotificationRepository;
+import com.example.demo.infrastructure.project.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
@@ -16,10 +18,12 @@ public class SendNotificationItemWriter implements ItemWriter<NotificationEntity
 
     private final NotificationRepository notificationRepository;
     private final MessageSendService messageSendService;
+    private final ProjectRepository projectRepository;
 
-    public SendNotificationItemWriter(NotificationRepository notificationRepository, MessageSendService messageSendService) {
+    public SendNotificationItemWriter(NotificationRepository notificationRepository, MessageSendService messageSendService, ProjectRepository projectRepository) {
         this.notificationRepository = notificationRepository;
         this.messageSendService = messageSendService;
+        this.projectRepository = projectRepository;
     }
 
     @Override
@@ -27,7 +31,8 @@ public class SendNotificationItemWriter implements ItemWriter<NotificationEntity
         int count = 0;
 
         for (NotificationEntity entity : notificationEntities) {
-            boolean successful = messageSendService.sendMessage(entity.getUserId(), entity.getText());
+            Project project = projectRepository.findProjectByProjectToken(entity.getProjectToken()).orElseThrow();
+            boolean successful = messageSendService.sendMessage(project.getUser().getId(), entity.getText());
 
             if (successful) {
                 entity.setSent(true);

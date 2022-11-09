@@ -9,7 +9,7 @@ public class NotificationCommand {
         public static NotificationEntity toEntity(Task task, NotificationEvent event) {
             return NotificationEntity.builder()
                     .taskId(task.getTaskId())
-                    .userId(task.getTaskId())
+                    .projectToken(task.getProjectToken())
                     .event(event)
                     .text(task.getTaskName())
                     .build();
