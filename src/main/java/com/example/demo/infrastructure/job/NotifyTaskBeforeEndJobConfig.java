@@ -4,6 +4,7 @@ import com.example.demo.domain.notification.NotificationCommand;
 import com.example.demo.domain.notification.NotificationEntity;
 import com.example.demo.domain.notification.NotificationEvent;
 import com.example.demo.domain.project.task.Task;
+import com.example.demo.infrastructure.job.writer.SendNotificationItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -74,7 +75,7 @@ public class NotifyTaskBeforeEndJobConfig {
                 // pageSize: 한 번에 조회할 row 수
                 .pageSize(CHUNK_SIZE)
                 // 상태(status)가 ONGOING 이며, 마감일(endDayTime)이 1일 후인 task 가 알람 대상이 됩니다.
-                .queryString("select t from tasks t join fetch t.users where t.status = :status and t.endDayTime <= :endDayTime order by t.taskId")
+                .queryString("select t from Task t where t.status = :status and t.endDayTime > :endDayTime order by t.taskId")
                 .parameterValues(Map.of("status", Task.Status.ONGOING, "endDayTime", LocalDateTime.now().minusDays(1L)))
                 .build();
     }
