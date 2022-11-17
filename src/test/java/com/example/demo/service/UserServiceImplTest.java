@@ -1,24 +1,21 @@
-package com.example.demo.domain.user.service;
+package com.example.demo.service;
 
 import com.example.demo.common.exception.UserLoginFailException;
 import com.example.demo.common.util.log.LogService;
-import com.example.demo.domain.log.UserLog;
 import com.example.demo.domain.user.User;
+import com.example.demo.domain.user.service.UserReader;
+import com.example.demo.domain.user.service.UserService;
+import com.example.demo.domain.user.service.UserServiceImpl;
+import com.example.demo.domain.user.service.UserStore;
 import com.example.demo.infrastructure.log.LogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -53,7 +50,7 @@ class UserServiceImplTest {
 
         //when & then
         String userEmail = "test@naver.com";
-        String userPasword= "123";
+        String userPasword = "123";
         assertThrows(UserLoginFailException.class, () -> userService.loginUser(userEmail, userPasword));
 
     }

@@ -1,9 +1,6 @@
 package com.example.demo.infrastructure.support;
 
 import com.example.demo.application.user.UserFacade;
-import com.example.demo.domain.postIt.PostIt;
-import com.example.demo.domain.postIt.category.Category;
-import com.example.demo.domain.postIt.category.service.CategoryStore;
 import com.example.demo.domain.postIt.service.PostItStore;
 import com.example.demo.domain.project.Project;
 import com.example.demo.domain.project.service.ProjectReader;
@@ -11,16 +8,12 @@ import com.example.demo.domain.project.service.ProjectStore;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserCommand;
 import com.example.demo.domain.user.service.UserReader;
-import com.example.demo.domain.user.service.UserService;
 import com.example.demo.domain.user.service.UserStore;
 import com.example.demo.infrastructure.postIt.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 초기 테스트 데이터를 넣어주는 class
@@ -61,5 +54,14 @@ public class DBInit implements CommandLineRunner {
                 .build();
         project.changeProjectToken("project_1234");
         projectStore.store(project);
+
+        Project project2 = Project.builder()
+                .projectName("test-project2")
+                .user(user)
+                .userToken("user_1234")
+                .projectName("test-project12345")
+                .build();
+        project2.changeProjectToken("project_12345");
+        projectStore.store(project2);
     }
 }
