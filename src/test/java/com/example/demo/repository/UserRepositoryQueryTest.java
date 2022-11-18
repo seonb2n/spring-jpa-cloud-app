@@ -37,6 +37,7 @@ public class UserRepositoryQueryTest {
         User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
 
         //then
+        //fetch=Lazy 이므로 user 조회 한 번만 발생한다.
         System.out.println("== Query end ==");
         System.out.println(user.getUserNickName());
     }
@@ -84,6 +85,20 @@ public class UserRepositoryQueryTest {
         System.out.println("== Query end ==");
     }
 
+    @DisplayName("User Page 조회시 fetch join 만을 사용하면 Query 문 몇 개가 날아가는지 test")
+    @Test
+    public void givenFindUserPage_whenFindUserPage_thenReturnUsr() throws Exception {
+        //given
+
+        //when
+        Page<User> userPage = userRepository.findUserPageUsingEntityGraphByUserId(PageRequest.of(0, 1), 1L);
+
+        //then
+        //applying in memory! 경고가 발생한다.
+        System.out.println(userPage);
+        System.out.println("== Query end ==");
+    }
+
     @DisplayName("Project Page 조회시 Query 문 몇 개가 날아가는지 test")
     @Test
     public void givenFindProjectPage_whenFindProjectPage_thenReturnProject() throws Exception {
@@ -97,8 +112,4 @@ public class UserRepositoryQueryTest {
         System.out.println(projectPage);
         System.out.println("== Query end ==");
     }
-
-    // TODO BatchSize 로 해결하는 방법 구현하기
-    // https://velog.io/@jinyoungchoi95/JPA-%EB%AA%A8%EB%93%A0-N1-%EB%B0%9C%EC%83%9D-%EC%BC%80%EC%9D%B4%EC%8A%A4%EA%B3%BC-%ED%95%B4%EA%B2%B0%EC%B1%85
-
 }
