@@ -14,6 +14,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * User 조회와 관련된 N + 1 문제 해결을 위한 쿼리 테스트 입니다.
@@ -111,5 +115,18 @@ public class UserRepositoryQueryTest {
         // 쿼리 문이 1번만 발생한다.
         System.out.println(projectPage);
         System.out.println("== Query end ==");
+    }
+
+    @DisplayName("지연 로딩으로 연관된 field 를 가져올 때, getter 를 사용하면 null 반환을 방지하는지 test")
+    @Test
+    public void givenUser_whenFindUserProjectUsingGetter_thenReturnProject() throws Exception {
+        //given
+
+        //when
+        Optional<User> user = userRepository.findUserUsingFetchByUserId(1L);
+
+        //then
+        assertEquals("test-user", user.get().getUserNickName());
+        assertNotNull(user.get().getProjectList());
     }
 }

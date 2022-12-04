@@ -31,8 +31,10 @@ class UserServiceImplTest {
     @Autowired
     private LogRepository logRepository;
 
-    private LogService logService;
+    @Autowired
     private UserService userService;
+
+    private LogService logService;
 
     @BeforeEach
     public void beforeEach() throws Exception {
@@ -54,6 +56,4 @@ class UserServiceImplTest {
         assertThrows(UserLoginFailException.class, () -> userService.loginUser(userEmail, userPasword));
 
     }
-
-
 }
