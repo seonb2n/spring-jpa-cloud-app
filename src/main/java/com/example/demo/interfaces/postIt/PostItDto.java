@@ -53,29 +53,6 @@ public class PostItDto {
     @Getter
     @Setter
     @ToString
-    public static class RegisterBatchRequest {
-
-        private List<RegisterRequest> registerRequestList;
-
-    }
-
-    @Getter
-    @Setter
-    @ToString
-    public static class RegisterBatchResponse {
-
-        private List<RegisterResponse> registerResponses;
-
-        public RegisterBatchResponse(PostItInfo.PostItList postItList) {
-            registerResponses = new ArrayList<>();
-            postItList.getPostItInfoList().forEach(postItInfo -> registerResponses.add(new RegisterResponse(postItInfo)));
-        }
-
-    }
-
-    @Getter
-    @Setter
-    @ToString
     public static class UpdatePostItRequest {
 
         private String userToken;

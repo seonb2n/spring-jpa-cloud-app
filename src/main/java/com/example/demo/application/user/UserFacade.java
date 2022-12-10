@@ -16,7 +16,6 @@ public class UserFacade {
     private final ProjectService projectService;
 
     public UserInfo.Main registerUser(UserCommand.RegisterUser registerUser) {
-        // 1.userService register
         var userInfo = userService.registerUser(registerUser);
         projectService.registerNoneProject(userInfo.getUserToken());
         return userInfo;

@@ -19,4 +19,8 @@ public class PostItFacade {
     public String updateAllPostIt(PostItCommand.UpdatePostIt postItUpdateCommand) {
         return postItService.updateAllPostIt(postItUpdateCommand);
     }
+
+    public PostItInfo.PostItList getAllPostIt(String userToken) {
+        return postItService.getAllPostIt(userToken);
+    }
 }

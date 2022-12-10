@@ -34,4 +34,10 @@ public class PostItServiceImpl implements PostItService{
         postItSeriesUpdateFactory.updatePostItList(user, updatePostIt);
         return user.getUserToken();
     }
+
+    @Override
+    public PostItInfo.PostItList getAllPostIt(String userToken) {
+        var postItList = postItReader.getPostItList(userToken);
+        return new PostItInfo.PostItList(postItList);
+    }
 }

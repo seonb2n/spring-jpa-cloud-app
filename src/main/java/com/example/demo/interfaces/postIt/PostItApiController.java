@@ -28,5 +28,11 @@ public class PostItApiController {
         return CommonResponse.success(postItUpdateResponse);
     }
 
+    @GetMapping("/get/{userToken}")
+    public CommonResponse getAllPostIt(@PathVariable String userToken) {
+        var postItInfoList = postItFacade.getAllPostIt(userToken);
+        return CommonResponse.success(postItInfoList);
+    }
+
 
 }
