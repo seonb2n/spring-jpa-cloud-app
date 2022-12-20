@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@NoArgsConstructor
 @Entity
 @Getter
 @Table(name = "users")
@@ -56,12 +55,13 @@ public class User extends BaseEntity {
         private final String description;
     }
 
+    protected User() {}
+
     //builder 패턴으로 user Entity 생성
     @Builder
     public User(String userEmail, String password, String userNickName, String startDayTime, String endDayTime) {
 
         //TODO UserEmail 이 이미 존재하는 Email 인지 검증하는 로직 필요
-
         this.userToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_USER);
         this.userEmail = userEmail;
         this.password = password;
